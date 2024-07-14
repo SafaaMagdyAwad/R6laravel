@@ -12,9 +12,9 @@ class ContactController extends Controller
     }
     public function contactPost(Request $request){
         return "name is ". $request->name.
-        " email is ". $request->email.
-        " subject is ". $request->subject.
-        " message is ". $request->message
+        "<br> email is ". $request->email.
+        "<br> subject is ". $request->subject.
+        "<br> message is ". $request->message
         ;
     }
 }
