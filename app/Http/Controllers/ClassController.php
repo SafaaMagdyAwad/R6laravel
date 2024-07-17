@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Car;
+use App\Models\Classe;
 use Illuminate\Http\Request;
 
-class CarController extends Controller
+class ClassController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class CarController extends Controller
     public function create()
     {
         //
-        return view('add_car');
+        return view('add_class');
     }
 
     /**
@@ -29,23 +29,24 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //validation
         // dd($request->all());
-        if($request->published=='on'){
-            $published=true;
+        if($request->isFulled=='on'){
+            $fulled=true;
         }else{
-            $published=false;
+            $fulled=false;
         }
         //create
-        Car::create([
-           'carTitle'=>$request->carTitle, 
-           'discription'=>$request->discription, 
+        Classe::create([
+           'className'=>$request->className, 
+           'capacity'=>$request->capacity, 
            'price'=>$request->price, 
-           'published'=>$published, 
+           'isFulled'=>$fulled, 
+           'timeFrom'=>$request->timeFrom, 
+           'timeTo'=>$request->timeTo, 
         ]);
         //return
-        $cars=Car::all();
-        return view('cars',['cars'=>$cars]);
+        $classes=Classe::all();
+        return view('classes',['classes'=>$classes]);
 
     }
 

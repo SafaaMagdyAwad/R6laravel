@@ -14,7 +14,6 @@ class ContactController extends Controller
         return "name is ". $request->name.
         "<br> email is ". $request->email.
         "<br> subject is ". $request->subject.
-        "<br> message is ". $request->message
-        ;
+        "<br> message is ". $request->message;
     }
 }
