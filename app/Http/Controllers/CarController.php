@@ -29,7 +29,12 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //validation
+         //validation
+         $validatedData = $request->validate([
+            'carTitle' => 'required|string',
+            'discription' => 'required',
+            'price' => 'required',
+        ]);
         // dd($request->all());
         if($request->published=='on'){
             $published=true;

@@ -29,6 +29,14 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
+        //validation
+        $validatedData = $request->validate([
+            'className' => 'required|string',
+            'capacity' => 'required',
+            'price' => 'required',
+            'timeFrom' => 'required',
+            'timeTo' => 'required',
+        ]);
         // dd($request->all());
         if($request->isFulled=='on'){
             $fulled=true;
