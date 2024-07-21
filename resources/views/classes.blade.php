@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Car</title>
+  <title>All Classes</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +33,7 @@
               <th scope="col">is full</th>
               <th scope="col">From</th>
               <th scope="col">To</th>
+              <th scope="col">Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -41,9 +42,10 @@
               <td scope="row">{{$class['className']}}</td>
               <td>{{$class['price']}}</td>
               <td>{{$class['capacity']}}</td>
-              <td>{{$class['isFulled']==true?"YES":"NO"}}</td>
+              <td>{{$class['isFulled']?"YES":"NO"}}</td>
               <td>{{$class['timeFrom']}}</td>
               <td>{{$class['timeTo']}}</td>
+              <td><a href="{{route('class.edit',[$class['id']])}}">Edit</a></td>
             </tr>
             @endforeach
            

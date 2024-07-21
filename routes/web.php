@@ -67,10 +67,33 @@ Route::get('contact',[ContactController::class,'contact'])->name('contact');
 Route::post('contactPost',[ContactController::class,'contactPost'])->name('contactPost');
 
 
-Route::get('car/create',[CarController::class,'create'])->name('car.create');
+//cars
+
+Route::get('cars',[CarController::class,'index'])->name('cars');
+
+
+Route::get('car/{id}',[CarController::class,'show'])->name('car.show');
+
+Route::get('createCar',[CarController::class,'create'])->name('car.create');
 Route::post('car/store',[CarController::class,'store'])->name('car.store');
 
+Route::get('car/edit/{id}',[CarController::class,'edit'])->name('car.edit');
+Route::post('car/update/{id}',[CarController::class,'update'])->name('car.update');
 
-Route::get('class/create',[ClassController::class,'create'])->name('class.create');
+
+//classes
+
+
+Route::get('classes',[ClassController::class,'index'])->name('class.index');
+
+Route::get('class/{id}',[ClassController::class,'show'])->name('class.show');
+
+
+Route::get('createClass',[ClassController::class,'create'])->name('class.create');
 Route::post('class/store',[ClassController::class,'store'])->name('class.store');
 
+
+Route::get('class/edit/{id}',[ClassController::class,'edit'])->name('class.edit');
+Route::post('class/update/{id}',[ClassController::class,'update'])->name('class.update');
+
+//

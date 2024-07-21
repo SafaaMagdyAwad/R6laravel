@@ -12,7 +12,8 @@ class ClassController extends Controller
      */
     public function index()
     {
-        //
+        $classes=Classe::all();
+        return view('classes',['classes'=>$classes]);
     }
 
     /**
@@ -21,6 +22,7 @@ class ClassController extends Controller
     public function create()
     {
         //
+        // dd('create class');
         return view('add_class');
     }
 
@@ -29,32 +31,28 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(isset($request->isFulled));
         //validation
         $validatedData = $request->validate([
-            'className' => 'required|string',
+            'className' => 'required',
             'capacity' => 'required',
             'price' => 'required',
             'timeFrom' => 'required',
             'timeTo' => 'required',
         ]);
         // dd($request->all());
-        if($request->isFulled=='on'){
-            $fulled=true;
-        }else{
-            $fulled=false;
-        }
+       
         //create
         Classe::create([
            'className'=>$request->className, 
            'capacity'=>$request->capacity, 
            'price'=>$request->price, 
-           'isFulled'=>$fulled, 
+           'isFulled'=>isset($request->isFulled), 
            'timeFrom'=>$request->timeFrom, 
            'timeTo'=>$request->timeTo, 
         ]);
         //return
-        $classes=Classe::all();
-        return view('classes',['classes'=>$classes]);
+        return $this->index();
 
     }
 
@@ -64,6 +62,9 @@ class ClassController extends Controller
     public function show(string $id)
     {
         //
+        $class=Classe::findOrFail($id);
+        return view('class',['class'=>$class]);
+
     }
 
     /**
@@ -72,6 +73,8 @@ class ClassController extends Controller
     public function edit(string $id)
     {
         //
+        $class=Classe::findOrFail($id);
+        return view('update_class',['class'=>$class]);
     }
 
     /**

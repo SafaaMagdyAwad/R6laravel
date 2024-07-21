@@ -12,7 +12,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        $cars=Car::all();
+        return view('cars',['cars'=>$cars]);
     }
 
     /**
@@ -36,21 +37,17 @@ class CarController extends Controller
             'price' => 'required',
         ]);
         // dd($request->all());
-        if($request->published=='on'){
-            $published=true;
-        }else{
-            $published=false;
-        }
+       
         //create
         Car::create([
            'carTitle'=>$request->carTitle, 
            'discription'=>$request->discription, 
            'price'=>$request->price, 
-           'published'=>$published, 
+           'published'=>isset($request->published), 
         ]);
         //return
-        $cars=Car::all();
-        return view('cars',['cars'=>$cars]);
+       
+        return $this->index();
 
     }
 
@@ -60,6 +57,8 @@ class CarController extends Controller
     public function show(string $id)
     {
         //
+        $car=Car::findOrFail($id);
+        return view('car',['car'=>$car]);
     }
 
     /**
@@ -68,6 +67,10 @@ class CarController extends Controller
     public function edit(string $id)
     {
         //
+        $car=Car::findOrFail($id);
+        // dd($car['id']);
+        return view('edit_car',['car'=>$car]);
+
     }
 
     /**
