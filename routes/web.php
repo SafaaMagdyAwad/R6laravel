@@ -88,12 +88,8 @@ Route::get('classes',[ClassController::class,'index'])->name('class.index');
 
 Route::get('class/{id}',[ClassController::class,'show'])->name('class.show');
 
-
 Route::get('createClass',[ClassController::class,'create'])->name('class.create');
 Route::post('class/store',[ClassController::class,'store'])->name('class.store');
 
-
 Route::get('class/edit/{id}',[ClassController::class,'edit'])->name('class.edit');
 Route::post('class/update/{id}',[ClassController::class,'update'])->name('class.update');
-
-//

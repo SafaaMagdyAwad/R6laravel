@@ -73,6 +73,7 @@ class ClassController extends Controller
     public function edit(string $id)
     {
         //
+
         $class=Classe::findOrFail($id);
         return view('update_class',['class'=>$class]);
     }
@@ -83,6 +84,8 @@ class ClassController extends Controller
     public function update(Request $request, string $id)
     {
         //
+
+
     }
 
     /**
