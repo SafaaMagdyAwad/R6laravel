@@ -49,7 +49,11 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">isFulled:</label>
             <div class="col-md-10">
+<<<<<<< HEAD
               <input type="checkbox" name="isFulled" class="form-check-input" style="padding: 0.7rem;" @checked($class->isFulled) />
+=======
+              <input type="checkbox" name="isFulled" class="form-check-input" style="padding: 0.7rem;"    @checked($class->isFulled)  />
+>>>>>>> e347ca11b841a5483378a8fd4772ecb8ba447905
             </div>
           </div>
           <hr>
