@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text("discription");
             $table->double("price");
             $table->boolean("published");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

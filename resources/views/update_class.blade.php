@@ -26,6 +26,7 @@
         <h2 class="fw-bold fs-2 mb-5 pb-2">Update Class</h2>
         <form action="{{route('class.update',[$class['id']])}}" method="post" class="px-md-5">
           @csrf
+          @method('put')
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">class Name:</label>
             <div class="col-md-10">

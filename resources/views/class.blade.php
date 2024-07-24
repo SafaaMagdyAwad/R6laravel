@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>class</title>
+  <title>Car Details</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,41 +22,47 @@
 <body>
   <main>
     <div class="container my-5">
-        <div class="bg-light p-5 rounded">
-          <div class="card bg-light border-0">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-6 col-12 card-body">
-
-                    <div class="mb-4 text-center py-2">
-                      
-
-
-
-
-                    <div class="mb-4 text-center py-2">
-                      <h2 class="fw-semibold bg-light card-header">name : {{$class->className}}</h2>
-                    </div>
-                    <div class="mb-4 text-center py-2">
-                      <h2 class="fw-semibold bg-light card-header">capacity: {{$class->capacity}}</h2>
-                    </div>
-                    <div class="mb-4 text-center py-2">
-                      <h2 class="fw-semibold bg-light card-header">price :{{$class->price}}</h2>
-                    </div>
-                    <div class="mb-4 text-center py-2">
-                        <h2 class="fw-semibold bg-light card-header">full? :{{$class->isFulled?"YES":"NO";}}</h2>
-                    </div>
-                    <div class="mb-4 text-center py-2">
-                      <h2 class="fw-semibold bg-light card-header">time :  from {{$class->timeFrom}} :to {{$class->timeTo}}</h2>
-                    </div>
-
-
-                    </div>
-
-
-                  </div>
+      <div class="bg-light p-5 rounded">
+        <div class="card bg-light border-0">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-10 position-relative overflow-hidden">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROYjj94a1EKPObxDQCbqSdwmIbkhQt5Np5lQ&s"
+                alt="" class="card-img"
+                style="position: absolute; margin: auto; top: 50%; transform: translateY(-50%); width: 100%;height: 100%; object-fit: cover;" />
+            </div>
+            <div class="col-lg-8 col-md-6 col-12 card-body">
+              <div class="mb-4 text-center py-2">
+                <h2 class="fw-bold bg-light card-header">{{$class->className}}</h2>
+              </div>
+              <div class="mb-4">
+                <p class="card-text">
+                  <span class="fw-bold">Price:</span> {{$class->price}}$
+                </p>
+              </div>
+              <div class="mb-4">
+                <p class="card-text">
+                  <span class="fw-bold">Capacity:</span> {{$class->capacity}}
+                </p>
+              </div>
+              <div class="mb-4">
+                <p class="card-text">
+                  <span class="fw-bold">Is Full:</span><br>{{$class->isFull}}
+                </p>
+              </div>
+              <div class="mb-4">
+                <p class="card-text">
+                  <span class="fw-bold">Time:</span><br>From : {{$class->timeFrom}} To: {{$class->timeTo}}
+                </p>
+              </div>
+              <div class="text-md-end">
+                <a href="{{route('class.index')}}" class="btn mt-4 btn-primary text-white fs-5 fw-bold border-0 py-2 px-md-5">
+                  Back to All classes
+                </a>
+              </div>
             </div>
           </div>
         </div>
+      </div>
     </div>
   </main>
 
@@ -65,3 +71,41 @@
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

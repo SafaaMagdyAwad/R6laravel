@@ -13,7 +13,7 @@ class ClassController extends Controller
     public function index()
     {
         $classes=Classe::all();
-        return view('classes',['classes'=>$classes]);
+        return view('classes',compact('classes'));
     }
 
     /**
@@ -21,8 +21,6 @@ class ClassController extends Controller
      */
     public function create()
     {
-        //
-        // dd('create class');
         return view('add_class');
     }
 
@@ -63,7 +61,7 @@ class ClassController extends Controller
     {
         //
         $class=Classe::findOrFail($id);
-        return view('class',['class'=>$class]);
+        return view('class',compact('class'));
 
     }
 
@@ -75,7 +73,7 @@ class ClassController extends Controller
         //
 
         $class=Classe::findOrFail($id);
-        return view('update_class',['class'=>$class]);
+        return view('update_class',compact('class'));
     }
 
     /**
@@ -84,6 +82,18 @@ class ClassController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $class=Classe::findOrFail($id);
+        if($class){
+            $class->className=$request->className;
+            $class->capacity=$request->capacity;
+            $class->price=$request->price;
+            $class->isFulled=isset($request->isFulled);
+            $class->timeFrom=$request->timeFrom;
+            $class->timeTo=$request->timeTo;
+
+            $class->save();
+        }
+        return $this->index();
 
 
     }
@@ -94,5 +104,11 @@ class ClassController extends Controller
     public function destroy(string $id)
     {
         //
+        $class=Classe::findOrFail($id);
+        if($class){
+            $class->delete();
+        }
+        return $this->index();
+
     }
 }

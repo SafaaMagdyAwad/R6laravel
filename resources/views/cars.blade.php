@@ -31,7 +31,9 @@
               <th scope="col">Price</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
+              <th scope="col">View</th>
               <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -41,7 +43,15 @@
               <td>{{$car['price']}}</td>
               <td>{{Str::limit($car['discription'], 25, '...')}}</td>
               <td>{{$car['published']?"YES":"NO"}}</td>
-              <td><a href="{{route('car.edit',[$car['id']])}}">Edit</a></td>
+              <td><a href="{{route('car.show',$car)}}">View</a></td>
+              <td><a href="{{route('car.edit',$car)}}">Edit</a></td>
+              <td>
+                <form method="POST" action="{{route('car.destroy',$car)}}">
+                  @csrf
+                  @method('delete')
+                  <button onclick="confirm('Are you sure you want to delete?')"> delete</button>
+                </form>
+              </td>
             </tr>
             @endforeach
            

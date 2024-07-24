@@ -13,7 +13,7 @@ class CarController extends Controller
     public function index()
     {
         $cars=Car::all();
-        return view('cars',['cars'=>$cars]);
+        return view('cars',compact('cars'));
     }
 
     /**
@@ -58,7 +58,7 @@ class CarController extends Controller
     {
         //
         $car=Car::findOrFail($id);
-        return view('car',['car'=>$car]);
+        return view('car',compact('car'));
     }
 
     /**
@@ -69,7 +69,7 @@ class CarController extends Controller
         //
         $car=Car::findOrFail($id);
         // dd($car['id']);
-        return view('edit_car',['car'=>$car]);
+        return view('edit_car',compact('car'));
 
     }
 
@@ -79,6 +79,16 @@ class CarController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $car=Car::findOrFail($id);
+        if($car){
+            $car->carTitle=$request->carTitle;
+            $car->discription=$request->discription;
+            $car->price=$request->price;
+            $car->published=isset($request->published);
+
+            $car->save();
+        }
+        return $this->index();
     }
 
     /**
@@ -87,5 +97,19 @@ class CarController extends Controller
     public function destroy(string $id)
     {
         //
+        Car::where('id',$id)->delete();
+        return $this->index();
+
+    }
+
+
+    public function showDeleted(){
+        $cars=Car::onlyTrashed()->get();
+        return view('trashedCars',compact('cars'));
+    }
+    public function perminantDelete($id){
+        Car::where('id',$id)->forceDelete();
+        return $this->showDeleted();
+
     }
 }
