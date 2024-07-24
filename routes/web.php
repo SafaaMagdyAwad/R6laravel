@@ -98,3 +98,7 @@ Route::post('class',[ClassController::class,'store'])->name('class.store');
 Route::get('class/{id}/edit',[ClassController::class,'edit'])->name('class.edit');
 Route::put('class/{id}',[ClassController::class,'update'])->name('class.update');
 Route::delete('class/{id}',[ClassController::class,'destroy'])->name('class.destroy');
+
+
+Route::get('deletedClasses',[ClassController::class,'showDeleted'])->name('classes.deleted');
+Route::delete('class/{id}/perminant',[ClassController::class,'perminantDelete'])->name('class.perminantDelete');

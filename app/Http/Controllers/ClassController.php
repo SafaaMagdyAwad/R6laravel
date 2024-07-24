@@ -59,7 +59,7 @@ class ClassController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
         $class=Classe::findOrFail($id);
         return view('class',compact('class'));
 
@@ -81,7 +81,7 @@ class ClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       
         $class=Classe::findOrFail($id);
         if($class){
             $class->className=$request->className;
@@ -93,6 +93,7 @@ class ClassController extends Controller
 
             $class->save();
         }
+
         return $this->index();
 
 
@@ -103,12 +104,22 @@ class ClassController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
         $class=Classe::findOrFail($id);
         if($class){
             $class->delete();
         }
         return $this->index();
+
+    }
+
+    public function showDeleted(){
+        $classes=Classe::onlyTrashed()->get();
+        return view('trashedClasses',compact('classes'));
+    }
+    public function perminantDelete(string $id){
+        Classe::where('id',$id)->forceDelete();
+        return $this->showDeleted();
 
     }
 }
