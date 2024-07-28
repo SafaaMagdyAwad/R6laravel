@@ -33,6 +33,7 @@
               <th scope="col">is full</th>
               <th scope="col">From</th>
               <th scope="col">To</th>
+              <th scope="col">Restore</th>
               <th scope="col">Perminant Delete</th>
             </tr>
           </thead>
@@ -46,7 +47,14 @@
               <td>{{$class['timeFrom']}}</td>
               <td>{{$class['timeTo']}}</td>
               <td>
-                <form method="POST" action="{{route('class.perminantDelete',$class)}}">
+                <form method="POST" action="{{route('class.restore',$class)}}">
+                  @csrf
+                  @method('patch')
+                  <button onclick="confirm('Are you sure you want to delete?')">Restore</button>
+                </form>
+              </td>
+              <td>
+                <form method="POST" action="{{route('class.forceDelete',$class)}}">
                   @csrf
                   @method('delete')
                   <button onclick="confirm('Are you sure you want to delete?')">Delete</button>

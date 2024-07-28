@@ -46,7 +46,7 @@
               </div>
               <div class="mb-4">
                 <p class="card-text">
-                  <span class="fw-bold">Is Full:</span><br>{{$class->isFull}}
+                  <span class="fw-bold">Is Full:</span><br>{{$class->isFull? "full":"not full"}}
                 </p>
               </div>
               <div class="mb-4">

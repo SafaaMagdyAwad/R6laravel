@@ -12,7 +12,8 @@ class ClassController extends Controller
      */
     public function index()
     {
-        $classes=Classe::all();
+        $classes=Classe::whereNull('deleted_at')->get();
+        // dd($classes);
         return view('classes',compact('classes'));
     }
 
@@ -32,23 +33,17 @@ class ClassController extends Controller
         // dd(isset($request->isFulled));
         //validation
         $validatedData = $request->validate([
-            'className' => 'required',
-            'capacity' => 'required',
-            'price' => 'required',
-            'timeFrom' => 'required',
-            'timeTo' => 'required',
+            'className' => 'required|string|max:50',
+            'capacity' => 'required|integer',
+            'price' => 'required|decimal:0,3',
+            'timeFrom' => 'required|date_format:H:i',
+            'timeTo' => 'required|date_format:H:i|after:timeFrom',
         ]);
         // dd($request->all());
-       
+       $validatedData['isFulled']=isset($request->isFulled);
+    //    dd($validatedData);
         //create
-        Classe::create([
-           'className'=>$request->className, 
-           'capacity'=>$request->capacity, 
-           'price'=>$request->price, 
-           'isFulled'=>isset($request->isFulled), 
-           'timeFrom'=>$request->timeFrom, 
-           'timeTo'=>$request->timeTo, 
-        ]);
+        Classe::create($validatedData);
         //return
         return $this->index();
 
@@ -57,58 +52,49 @@ class ClassController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(String $id)
     {
-        
         $class=Classe::findOrFail($id);
-        return view('class',compact('class'));
-
+        // dd($class->className);
+        return view('class',['class'=>$class]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit(String $id)
+    {        $class=Classe::findOrFail($id);
 
-        $class=Classe::findOrFail($id);
-        return view('update_class',compact('class'));
+        return view('update_class',['class'=>$class]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-       
-        $class=Classe::findOrFail($id);
-        if($class){
-            $class->className=$request->className;
-            $class->capacity=$request->capacity;
-            $class->price=$request->price;
-            $class->isFulled=isset($request->isFulled);
-            $class->timeFrom=$request->timeFrom;
-            $class->timeTo=$request->timeTo;
+    public function update(Request $request, String $id)
+    {        $class=Classe::findOrFail($id);
 
-            $class->save();
-        }
-
+        $validatedData = $request->validate([
+            'className' => 'required|string|max:50',
+            'capacity' => 'required|integer',
+            'price' => 'required|decimal:0,3',
+            'timeFrom' => 'required|date_format:H:i',
+            'timeTo' => 'required|date_format:H:i|after:timeFrom',
+        ]);
+        $class->update($validatedData);
         return $this->index();
-
-
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Classe $class)
     {
-        
-        $class=Classe::findOrFail($id);
-        if($class){
-            $class->delete();
-        }
+
+        // dd($class);
+        $class
+        ->withTrashed()
+        ->delete();
         return $this->index();
 
     }
@@ -117,9 +103,17 @@ class ClassController extends Controller
         $classes=Classe::onlyTrashed()->get();
         return view('trashedClasses',compact('classes'));
     }
-    public function perminantDelete(string $id){
-        Classe::where('id',$id)->forceDelete();
+    public function forceDelete(Classe $class){
+        $class
+        ->withTrashed()
+        ->forceDelete();
         return $this->showDeleted();
-
+    }
+    public function restore(Classe $class){
+       
+        // dd("safaa");
+        $class->withTrashed()
+        ->restore();
+        return redirect()->route('classes.deleted');
     }
 }

@@ -12,59 +12,59 @@ Route::get('/', function () {
 
 
 
-Route::prefix('accounts')->group(
-    function(){
-        Route::get('',function(){
-            return "accounts ";
-        });
-        Route::get('/admin',function(){
-            return "accounts admin ";
-        });
-        Route::get('/user',function(){
-            return "accounts user ";
-        });
+// Route::prefix('accounts')->group(
+//     function(){
+//         Route::get('',function(){
+//             return "accounts ";
+//         });
+//         Route::get('/admin',function(){
+//             return "accounts admin ";
+//         });
+//         Route::get('/user',function(){
+//             return "accounts user ";
+//         });
 
-    }
-);
-Route::prefix('cars')->group(
-    function(){
+//     }
+// );
+// Route::prefix('cars')->group(
+//     function(){
        
-        Route::prefix('usa')->group(
-            function(){
-                Route::get('/ford',function(){
-                    return "cars usa ford ";
-                });
-                Route::get('/tesla',function(){
-                    return "cars usa tesla ";
-                });
+//         Route::prefix('usa')->group(
+//             function(){
+//                 Route::get('/ford',function(){
+//                     return "cars usa ford ";
+//                 });
+//                 Route::get('/tesla',function(){
+//                     return "cars usa tesla ";
+//                 });
         
-            }
-        );
+//             }
+//         );
 
-        Route::prefix('ger')->group(
-            function(){
-                Route::get('/mercedes',function(){
-                    return "cars ger mercedes ";
-                });
-                Route::get('/audi',function(){
-                    return "cars ger audi ";
-                });
-                Route::get('/volkswagen',function(){
-                    return "cars ger volkswagen ";
-                });
+//         Route::prefix('ger')->group(
+//             function(){
+//                 Route::get('/mercedes',function(){
+//                     return "cars ger mercedes ";
+//                 });
+//                 Route::get('/audi',function(){
+//                     return "cars ger audi ";
+//                 });
+//                 Route::get('/volkswagen',function(){
+//                     return "cars ger volkswagen ";
+//                 });
         
-            }
-        );
+//             }
+//         );
 
-    }
-);
+//     }
+// );
 
 
-Route::get('login',[ExambleController::class,'login'])->name('login');
-Route::post('loginPost',[ExambleController::class,'loginPost'])->name('loginPost');
+// Route::get('login',[ExambleController::class,'login'])->name('login');
+// Route::post('loginPost',[ExambleController::class,'loginPost'])->name('loginPost');
 
-Route::get('contact',[ContactController::class,'contact'])->name('contact');
-Route::post('contactPost',[ContactController::class,'contactPost'])->name('contactPost');
+// Route::get('contact',[ContactController::class,'contact'])->name('contact');
+// Route::post('contactPost',[ContactController::class,'contactPost'])->name('contactPost');
 
 
 //cars
@@ -79,11 +79,12 @@ Route::post('car/store',[CarController::class,'store'])->name('car.store');
 Route::get('car/{id}/edit',[CarController::class,'edit'])->name('car.edit');
 Route::put('car/{id}',[CarController::class,'update'])->name('car.update');
 
-Route::delete('car/{id}',[CarController::class,'destroy'])->name('car.destroy');
+Route::delete('car/{id}',[CarController::class,'destroy'])->name('car.destroy');//soft delete
 
 
 Route::get('deletedCars',[CarController::class,'showDeleted'])->name('cars.deleted');
 Route::delete('car/{id}/perminant',[CarController::class,'perminantDelete'])->name('car.perminantDelete');
+Route::patch('car/{id}', [CarController::class, 'restore'])->name('car.restore');
 
 
 //classes
@@ -101,4 +102,7 @@ Route::delete('class/{id}',[ClassController::class,'destroy'])->name('class.dest
 
 
 Route::get('deletedClasses',[ClassController::class,'showDeleted'])->name('classes.deleted');
-Route::delete('class/{id}/perminant',[ClassController::class,'perminantDelete'])->name('class.perminantDelete');
+
+Route::delete('class/{id}/forceDelete',[ClassController::class,'forceDelete'])->name('class.forceDelete');
+
+Route::patch('class/{id}/restore',[ClassController::class,'restore'])->name('class.restore');

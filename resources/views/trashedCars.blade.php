@@ -31,6 +31,7 @@
               <th scope="col">Price</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
+              <th scope="col">Restore</th>
               <th scope="col">Perminant Delete</th>
             </tr>
           </thead>
@@ -42,10 +43,17 @@
               <td>{{Str::limit($car['discription'], 25, '...')}}</td>
               <td>{{$car['published']?"YES":"NO"}}</td>
               <td>
+                <form method="POST" action="{{route('car.restore',$car)}}">
+                  @csrf
+                  @method('patch')
+                  <button type="submit" > restore</button>
+                </form>
+              </td>
+              <td>
                 <form method="POST" action="{{route('car.perminantDelete',$car)}}">
                   @csrf
                   @method('delete')
-                  <button onclick="confirm('Are you sure you want to delete?')"> delete</button>
+                  <button type="submit" onclick="confirm('Are you sure you want to delete?')"> delete</button>
                 </form>
               </td>
             </tr>

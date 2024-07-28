@@ -23,7 +23,7 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">All Cars</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">All classes</h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
@@ -52,8 +52,8 @@
               <td>
                 <form method="POST" action="{{route('class.destroy',$class)}}">
                   @csrf
-                  @method('delete')
-                  <button onclick="confirm('Are you sure you want to delete?')">Delete</button>
+                  @method('DELETE')
+                  <button type="submit" onclick="confirm('Are you sure you want to delete?')">Delete</button>
                 </form>
               </td>
             </tr>

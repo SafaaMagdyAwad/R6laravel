@@ -10,6 +10,10 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
+    private Car $car;
+    public function __construct(){
+    
+    }
     public function index()
     {
         $cars=Car::all();
@@ -54,10 +58,8 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($car)
     {
-        //
-        $car=Car::findOrFail($id);
         return view('car',compact('car'));
     }
 
@@ -111,5 +113,12 @@ class CarController extends Controller
         Car::where('id',$id)->forceDelete();
         return $this->showDeleted();
 
+    }
+    public function restore(Car $car){
+       
+        // dd("safaa");
+        $car->withTrashed()
+        ->restore();
+        return redirect()->route('cars.deleted');
     }
 }
