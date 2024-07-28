@@ -27,26 +27,38 @@
         <form action="{{route('class.store')}}" method="post" class="px-md-5">
           @csrf
           <div class="form-group mb-3 row">
+            @error('className')
+          <div class="error">{{ $message }}</div>
+      @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">class Name:</label>
             <div class="col-md-10">
               <input type="text" placeholder="className" name="className" class="form-control py-2" />
             </div>
           </div>
           <div class="form-group mb-3 row">
+            @error('capacity')
+          <div class="error">{{ $message }}</div>
+      @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">capacity:</label>
             <div class="col-md-10">
               <input type="number" step="1" name="capacity" placeholder="Enter capacity" class="form-control py-2" />
             </div>
           </div>
           <div class="form-group mb-3 row">
+            @error('price')
+          <div class="error">{{ $message }}</div>
+      @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" name="price" placeholder="Enter price" class="form-control py-2" />
+              <input type="text" step="0.1" name="price" placeholder="Enter price" class="form-control py-2" />
             </div>
           </div>
           
           <hr>
           <div class="form-group mb-3 row">
+            @error('isFulled')
+          <div class="error">{{ $message }}</div>
+      @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">isFulled:</label>
             <div class="col-md-10">
               <input type="checkbox" name="isFulled" class="form-check-input" style="padding: 0.7rem;" />
@@ -54,6 +66,9 @@
           </div>
           <hr>
           <div class="form-group mb-3 row">
+            @error('timeFrom')
+          <div class="error">{{ $message }}</div>
+      @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time From:</label>
             <div class="col-md-10">
               <input type="time" placeholder="timeFrom" name="timeFrom" class="form-control py-2" />
@@ -61,6 +76,9 @@
           </div>
           <hr>
           <div class="form-group mb-3 row">
+            @error('timeTo')
+          <div class="error">{{ $message }}</div>
+      @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time To:</label>
             <div class="col-md-10">
               <input type="time" placeholder="timeTo" name="timeTo" class="form-control py-2" />

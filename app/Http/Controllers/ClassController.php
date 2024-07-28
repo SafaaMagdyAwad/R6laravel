@@ -36,8 +36,8 @@ class ClassController extends Controller
             'className' => 'required|string|max:50',
             'capacity' => 'required|integer',
             'price' => 'required|decimal:0,3',
-            'timeFrom' => 'required|date_format:H:i',
-            'timeTo' => 'required|date_format:H:i|after:timeFrom',
+            'timeFrom' => 'required',
+            'timeTo' => 'required|after:timeFrom',
         ]);
         // dd($request->all());
        $validatedData['isFulled']=isset($request->isFulled);
@@ -75,25 +75,28 @@ class ClassController extends Controller
     {        $class=Classe::findOrFail($id);
 
         $validatedData = $request->validate([
-            'className' => 'required|string|max:50',
-            'capacity' => 'required|integer',
-            'price' => 'required|decimal:0,3',
-            'timeFrom' => 'required|date_format:H:i',
-            'timeTo' => 'required|date_format:H:i|after:timeFrom',
+            'className' => 'string|max:50',
+            'capacity' => 'integer',
+            'price' => 'decimal:0,3',
+            
+            'timeTo' => '|after:timeFrom',
         ]);
+       $validatedData['isFulled']=isset($request->isFulled);
+       $validatedData['timeFrom']=$request->timeFrom;
+        // dd($validatedData);
+
         $class->update($validatedData);
+
         return $this->index();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Classe $class)
+    public function destroy(String $id)
     {
-
         // dd($class);
-        $class
-        ->withTrashed()
+        Classe::find($id)
         ->delete();
         return $this->index();
 
@@ -103,9 +106,8 @@ class ClassController extends Controller
         $classes=Classe::onlyTrashed()->get();
         return view('trashedClasses',compact('classes'));
     }
-    public function forceDelete(Classe $class){
-        $class
-        ->withTrashed()
+    public function forceDelete(String $id){
+        Classe::find($id)
         ->forceDelete();
         return $this->showDeleted();
     }

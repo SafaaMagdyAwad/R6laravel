@@ -27,18 +27,27 @@
         <form action="{{route('class.update',[$class['id']])}}" method="post" class="px-md-5">
           @csrf
           @method('put')
+          @error('className')
+          <div class="error">{{ $message }}</div>
+      @enderror
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">class Name:</label>
             <div class="col-md-10">
               <input type="text" placeholder="className" name="className" class="form-control py-2" value="{{$class->className}}"/>
             </div>
           </div>
+          @error('capacity')
+          <div class="error">{{ $message }}</div>
+      @enderror
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">capacity:</label>
             <div class="col-md-10">
               <input type="number" step="1" name="capacity" placeholder="Enter capacity" class="form-control py-2" value="{{$class->capacity}}"/>
             </div>
           </div>
+          @error('price')
+          <div class="error">{{ $message }}</div>
+      @enderror
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
@@ -47,6 +56,9 @@
           </div>
           
           <hr>
+          @error('isFulled')
+          <div class="error">{{ $message }}</div>
+      @enderror
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">isFulled:</label>
             <div class="col-md-10">
@@ -55,6 +67,9 @@
             </div>
           </div>
           <hr>
+          @error('timeFrom')
+          <div class="error">{{ $message }}</div>
+      @enderror
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time From:</label>
             <div class="col-md-10">
@@ -62,6 +77,9 @@
             </div>
           </div>
           <hr>
+          @error('timeTo')
+          <div class="error">{{ $message }}</div>
+      @enderror
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time To:</label>
             <div class="col-md-10">
