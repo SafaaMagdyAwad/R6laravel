@@ -102,14 +102,14 @@ class NewClassController extends Controller
         return view('trashedClasses',compact('classes'));
     }
     public function forceDelete(Classe $class){
-        dd("force delete");
+        // dd("force delete");
         if($class){
             $class->forceDelete();
         }
         return $this->showDeleted();
     }
     public function restore(Classe $class ){
-        dd("restore");
+        // dd("restore");
         if($class){
             $class->restore();
         }
