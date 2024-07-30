@@ -11,7 +11,6 @@ class Classe extends Model
     use HasFactory ;
     use SoftDeletes ;
     protected $table = 'classes';
-    protected $primaryKey = 'id';
 
     protected $fillable = [
         'className',
