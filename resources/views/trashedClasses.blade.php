@@ -24,6 +24,7 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">trashed Cars</h2>
+        <a class="btn btn-dark form-control mb-5 pb-3" href="{{route('class.index')}}"> all classes</a>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
@@ -47,14 +48,14 @@
               <td>{{$class['timeFrom']}}</td>
               <td>{{$class['timeTo']}}</td>
               <td>
-                <form method="POST" action="{{route('class.restore',$class->id)}}">
+                <form method="POST" action="{{route('class.restore',$class)}}">
                   @csrf
                   @method('PATCH')
                   <button type="submit">Restore</button>
                 </form>
               </td>
               <td>
-                <form method="POST" action="{{route('class.forceDelete',$class->id)}}">
+                <form method="POST" action="{{route('class.forceDelete',$class)}}">
                   @csrf
                   @method('DELETE')
                   <button type="submit" onclick="confirm('Are you sure you want to delete?')">Delete</button>

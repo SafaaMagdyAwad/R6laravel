@@ -24,6 +24,8 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">All classes</h2>
+        <a class="btn btn-dark form-control mb-5 pb-3" href="{{route('class.create')}}"> add class</a>
+
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
