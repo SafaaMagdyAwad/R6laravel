@@ -91,21 +91,17 @@ Route::get('/', function () {
 
 //classes
 
-// Route::get('class',[NewClassController::class,'index'])->name('class.index');
+Route::get('/class', [NewClassController::class, 'index'])->name('class.index');
+Route::post('/class', [NewClassController::class, 'store'])->name('class.store');
+Route::get('/class/create', [NewClassController::class, 'create'])->name('class.create');
+Route::get('class/deleted',[NewClassController::class,'showDeleted'])->name('classes.deleted');
+Route::get('/class/{class}', [NewClassController::class, 'show'])->name('class.show');
+Route::put('/class/{class}', [NewClassController::class, 'update'])->name('class.update');
+Route::delete('/class/{class}', [NewClassController::class, 'destroy'])->name('class.destroy');
+Route::get('/class/{class}/edit', [NewClassController::class, 'edit'])->name('class.edit');
+Route::delete('forceDelete/{class}',[NewClassController::class,'forceDelete'])->name('class.forceDelete');
+Route::patch('restore/{class}',[NewClassController::class,'restore'])->name('class.restore');
 
-// Route::get('class/{id}',[NewClassController::class,'show'])->name('class.show');
+// Route::resource('class',NewClassController::class);
 
-// Route::get('class/create',[NewClassController::class,'create'])->name('class.create');
-// Route::post('class',[NewClassController::class,'store'])->name('class.store');
 
-// Route::get('class/{id}/edit',[NewClassController::class,'edit'])->name('class.edit');
-// Route::put('class/{id}',[NewClassController::class,'update'])->name('class.update');
-// Route::delete('class/{id}',[NewClassController::class,'destroy'])->name('class.destroy');
-
-Route::resource('class',NewClassController::class);
-
-Route::get('deletedClasses',[NewClassController::class,'showDeleted'])->name('classes.deleted');
-
-Route::delete('class/{id}/forceDelete',[NewClassController::class,'forceDelete'])->name('class.forceDelete');
-
-Route::patch('class/{id}/restore',[NewClassController::class,'restore'])->name('class.restore');
