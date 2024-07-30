@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ClassController extends Controller
 {
-    //
+    
     private $newClassController;
     public function __construct(){
         $this->newClassController=new NewClassController;

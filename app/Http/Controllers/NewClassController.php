@@ -88,6 +88,8 @@ class NewClassController extends Controller
         return $this->index();
     }
 
+
+    
     /**
      * Remove the specified resource from storage.
      */
