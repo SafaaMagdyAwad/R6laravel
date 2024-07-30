@@ -49,15 +49,15 @@
               <td>
                 <form method="POST" action="{{route('class.restore',$class)}}">
                   @csrf
-                  @method('patch')
-                  <button onclick="confirm('Are you sure you want to delete?')">Restore</button>
+                  @method('PATCH')
+                  <button type="submit">Restore</button>
                 </form>
               </td>
               <td>
                 <form method="POST" action="{{route('class.forceDelete',$class)}}">
                   @csrf
-                  @method('delete')
-                  <button onclick="confirm('Are you sure you want to delete?')">Delete</button>
+                  @method('DELETE')
+                  <button type="submit" onclick="confirm('Are you sure you want to delete?')">Delete</button>
                 </form>
               </td>
             </tr>

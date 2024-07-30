@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ExambleController;
+// use App\Http\Controllers\ClassController;
+// use App\Http\Controllers\ContactController;
+// use App\Http\Controllers\ExambleController;
+use App\Http\Controllers\NewClassController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -69,40 +71,41 @@ Route::get('/', function () {
 
 //cars
 
-Route::get('car',[CarController::class,'index'])->name('cars');
+// Route::get('car',[CarController::class,'index'])->name('cars');
 
-Route::get('car/{id}',[CarController::class,'show'])->name('car.show');
+// Route::get('car/{id}',[CarController::class,'show'])->name('car.show');
 
-Route::get('createCar',[CarController::class,'create'])->name('car.create');
-Route::post('car/store',[CarController::class,'store'])->name('car.store');
+// Route::get('createCar',[CarController::class,'create'])->name('car.create');
+// Route::post('car/store',[CarController::class,'store'])->name('car.store');
 
-Route::get('car/{id}/edit',[CarController::class,'edit'])->name('car.edit');
-Route::put('car/{id}',[CarController::class,'update'])->name('car.update');
+// Route::get('car/{id}/edit',[CarController::class,'edit'])->name('car.edit');
+// Route::put('car/{id}',[CarController::class,'update'])->name('car.update');
 
-Route::delete('car/{id}',[CarController::class,'destroy'])->name('car.destroy');//soft delete
+// Route::delete('car/{id}',[CarController::class,'destroy'])->name('car.destroy');//soft delete
 
 
-Route::get('deletedCars',[CarController::class,'showDeleted'])->name('cars.deleted');
-Route::delete('car/{id}/perminant',[CarController::class,'perminantDelete'])->name('car.perminantDelete');
-Route::patch('car/{id}', [CarController::class, 'restore'])->name('car.restore');
+// Route::get('deletedCars',[CarController::class,'showDeleted'])->name('cars.deleted');
+// Route::delete('car/{id}/perminant',[CarController::class,'perminantDelete'])->name('car.perminantDelete');
+// Route::patch('car/{id}', [CarController::class, 'restore'])->name('car.restore');
 
 
 //classes
 
-Route::get('class',[ClassController::class,'index'])->name('class.index');
+// Route::get('class',[NewClassController::class,'index'])->name('class.index');
 
-Route::get('class/{id}',[ClassController::class,'show'])->name('class.show');
+// Route::get('class/{id}',[NewClassController::class,'show'])->name('class.show');
 
-Route::get('createClass',[ClassController::class,'create'])->name('class.create');
-Route::post('class',[ClassController::class,'store'])->name('class.store');
+// Route::get('class/create',[NewClassController::class,'create'])->name('class.create');
+// Route::post('class',[NewClassController::class,'store'])->name('class.store');
 
-Route::get('class/{id}/edit',[ClassController::class,'edit'])->name('class.edit');
-Route::put('class/{id}',[ClassController::class,'update'])->name('class.update');
-Route::delete('class/{id}',[ClassController::class,'destroy'])->name('class.destroy');
+// Route::get('class/{id}/edit',[NewClassController::class,'edit'])->name('class.edit');
+// Route::put('class/{id}',[NewClassController::class,'update'])->name('class.update');
+// Route::delete('class/{id}',[NewClassController::class,'destroy'])->name('class.destroy');
 
+Route::resource('class',NewClassController::class);
 
-Route::get('deletedClasses',[ClassController::class,'showDeleted'])->name('classes.deleted');
+Route::get('deletedClasses',[NewClassController::class,'showDeleted'])->name('classes.deleted');
 
-Route::delete('class/{id}/forceDelete',[ClassController::class,'forceDelete'])->name('class.forceDelete');
+Route::delete('class/{id}/forceDelete',[NewClassController::class,'forceDelete'])->name('class.forceDelete');
 
-Route::patch('class/{id}/restore',[ClassController::class,'restore'])->name('class.restore');
+Route::patch('class/{id}/restore',[NewClassController::class,'restore'])->name('class.restore');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classe;
 use Illuminate\Http\Request;
 
-class ClassController extends Controller
+class NewClassController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,6 +23,7 @@ class ClassController extends Controller
     public function create()
     {
         return view('add_class');
+        
     }
 
     /**
@@ -30,8 +31,6 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(isset($request->isFulled));
-        //validation
         $validatedData = $request->validate([
             'className' => 'required|string|max:50',
             'capacity' => 'required|integer',
@@ -52,28 +51,27 @@ class ClassController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(String $id)
+    public function show(Classe $class)
     {
-        $class=Classe::findOrFail($id);
-        // dd($class->className);
-        return view('class',['class'=>$class]);
+        // dd($class);
+        return view('class', compact('class'));
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(String $id)
-    {        $class=Classe::findOrFail($id);
-
+    public function edit(Classe $class)
+    {
         return view('update_class',['class'=>$class]);
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, String $id)
-    {        $class=Classe::findOrFail($id);
-
+    public function update(Request $request, Classe $class)
+    {
         $validatedData = $request->validate([
             'className' => 'string|max:50',
             'capacity' => 'integer',
@@ -93,29 +91,24 @@ class ClassController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(String $id)
+    public function destroy(Classe $class)
     {
-        // dd($class);
-        Classe::find($id)
-        ->delete();
+        $class->delete();
         return $this->index();
-
     }
 
     public function showDeleted(){
         $classes=Classe::onlyTrashed()->get();
         return view('trashedClasses',compact('classes'));
     }
-    public function forceDelete(String $id){
-        Classe::find($id)
-        ->forceDelete();
+    public function forceDelete(Classe $class){
+        // dd("nbnbn");
+        $class->forceDelete();
         return $this->showDeleted();
     }
-    public function restore(Classe $class){
-       
-        // dd("safaa");
-        $class->withTrashed()
-        ->restore();
+    public function restore(Classe $class ){
+        // dd($class);
+        $class->restore();
         return redirect()->route('classes.deleted');
     }
 }
