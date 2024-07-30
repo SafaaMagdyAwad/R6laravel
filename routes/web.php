@@ -90,7 +90,7 @@ Route::get('/', function () {
 
 
 //changed task 7
-
+// i think all resource controller methoda only can have model instance as a paremeter
 Route::get('/class', [NewClassController::class, 'index'])->name('class.index');
 Route::post('/class', [NewClassController::class, 'store'])->name('class.store');
 Route::get('/class/create', [NewClassController::class, 'create'])->name('class.create');
@@ -99,6 +99,8 @@ Route::get('/class/{class}', [NewClassController::class, 'show'])->name('class.s
 Route::put('/class/{class}', [NewClassController::class, 'update'])->name('class.update');
 Route::delete('/class/{class}', [NewClassController::class, 'destroy'])->name('class.destroy');
 Route::get('/class/{class}/edit', [NewClassController::class, 'edit'])->name('class.edit');
+
+
 Route::patch('restore/{id}',[ClassController::class,'restore'])->name('class.restore');
 Route::delete('forceDelete/{id}',[ClassController::class,'forceDelete'])->name('class.forceDelete');
 
