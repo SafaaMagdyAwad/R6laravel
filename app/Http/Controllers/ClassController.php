@@ -17,7 +17,8 @@ class ClassController extends Controller
         $path = 'assets/images';
         $image->move($path, $file_name);
         return $file_name;
-}
+    }
+    
     public function index()
     {
         $classes=Classe::whereNull('deleted_at')->get();
@@ -96,7 +97,7 @@ class ClassController extends Controller
        $validatedData['timeFrom']=$request->timeFrom;
        // dd($validatedData);
        $image_name=$request->hasFile('image')?$this->upload_image($request->image):$request->old_image;
-       
+    //    dd($request->hasFile('image'));
        $validatedData['image']=$image_name;
 
         $class->update($validatedData);
