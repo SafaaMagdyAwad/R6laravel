@@ -41,12 +41,22 @@
             @error('image')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <img src="{{ asset('assets/images/' . $class->image) }}" 
-              alt="" class="card-img"/> 
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">class image:</label>
-            <div class="col-md-10">
-              <input type="file"  name="image" class="form-control py-2"/>
+            <div class="row">
+              @if ($class->image != "null")
+                  
+              <div class="col-3">
+                <img src="{{ asset('assets/images/' . $class->image) }}" alt="{{$class->className}}"   width="60" height="100" /> 
+              </div>
+              @endif
+           
+              <div class="col-9">
+                <label for="" class="form-label col-md-2 fw-bold text-md-end">class image:</label>
+                <div class="col-md-10">
+                  <input type="file"  name="image" class="form-control py-2"/>
+                </div>
+              </div>
             </div>
+           
           </div>
           @error('capacity')
           <div class="error">{{ $message }}</div>

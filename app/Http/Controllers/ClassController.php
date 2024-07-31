@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ClassController extends Controller
 {
@@ -18,6 +19,7 @@ class ClassController extends Controller
         $image->move($path, $file_name);
         return $file_name;
     }
+    
     
     public function index()
     {
@@ -49,9 +51,10 @@ class ClassController extends Controller
             'timeTo' => 'required|after:timeFrom',
         ]);
         // dd($request->all());
-       $validatedData['isFulled']=isset($request->isFulled);
-       $image_name=$this->upload_image($request->image);
-        //   dd($image_name);
+        $validatedData['isFulled']=isset($request->isFulled);
+        $image_name=(empty($request->image ))?"null":$this->upload_image($request->image);
+        
+        // dd($image_name);
 
        $validatedData['image']=$image_name;
     //    dd($validatedData);
@@ -84,6 +87,7 @@ class ClassController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    
     public function update(Request $request, Classe $class)
     {
         $validatedData = $request->validate([
