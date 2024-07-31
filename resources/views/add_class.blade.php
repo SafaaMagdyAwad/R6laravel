@@ -24,15 +24,24 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Add Class</h2>
-        <form action="{{route('class.store')}}" method="post" class="px-md-5">
+        <form action="{{route('class.store')}}" method="post" class="px-md-5" enctype="multipart/form-data">
           @csrf
           <div class="form-group mb-3 row">
             @error('className')
-          <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">class Name:</label>
             <div class="col-md-10">
               <input type="text" placeholder="className" name="className" class="form-control py-2" />
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
+            @error('image')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">class image:</label>
+            <div class="col-md-10">
+              <input type="file"  name="image" class="form-control py-2" />
             </div>
           </div>
           <div class="form-group mb-3 row">

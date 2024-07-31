@@ -14,6 +14,7 @@ class Classe extends Model
 
     protected $fillable = [
         'className',
+        'image',
         'capacity',
         'price',
         'isFulled',

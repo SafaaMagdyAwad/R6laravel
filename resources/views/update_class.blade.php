@@ -27,6 +27,7 @@
         <form action="{{route('class.update',$class)}}" method="post" class="px-md-5">
           @csrf
           @method('put')
+          <input type="hidden" name="old_image" value="{{$class->image}}">
           @error('className')
           <div class="error">{{ $message }}</div>
       @enderror
@@ -34,6 +35,17 @@
             <label for="" class="form-label col-md-2 fw-bold text-md-end">class Name:</label>
             <div class="col-md-10">
               <input type="text" placeholder="className" name="className" class="form-control py-2" value="{{$class->className}}"/>
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
+            @error('image')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <img src="{{ asset('assets/images/' . $class->image) }}" 
+              alt="" class="card-img"/> 
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">class image:</label>
+            <div class="col-md-10">
+              <input type="file"  name="image" class="form-control py-2"/>
             </div>
           </div>
           @error('capacity')
