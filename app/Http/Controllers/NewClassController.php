@@ -44,7 +44,7 @@ class NewClassController extends Controller
         //create
         Classe::create($validatedData);
         //return
-        return $this->index();
+        return redirect()->route('class.index');
 
     }
 
@@ -85,7 +85,7 @@ class NewClassController extends Controller
 
         $class->update($validatedData);
 
-        return $this->index();
+        return redirect()->route('class.index');
     }
 
 
@@ -96,12 +96,29 @@ class NewClassController extends Controller
     public function destroy(Classe $class)
     {
         $class->delete();
-        return $this->index();
+        return redirect()->route('class.index');
     }
 
     public function showDeleted(){
         $classes=Classe::onlyTrashed()->get();
         return view('trashedClasses',compact('classes'));
+    }
+    public function forceDelete(Classe $class){
+        // $class=Classe::withTrashed()->find($id);
+        // dd($class);
+        if($class){
+            $class->forceDelete();
+        }
+        return redirect()->route('classes.deleted');
+    }
+    public function restore(Classe $class){
+        // dd($id);  //output 1
+        // $class=Classe::withTrashed()->find($id);
+        
+        if($class){
+            $class->restore();
+        }
+        return redirect()->route('classes.deleted');
     }
    
 }

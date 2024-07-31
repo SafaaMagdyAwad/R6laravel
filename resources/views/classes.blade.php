@@ -55,7 +55,7 @@
                 <form method="POST" action="{{route('class.destroy',$class)}}">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" onclick="confirm('Are you sure you want to delete?')">Delete</button>
+                  <button type="submit" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
                 </form>
               </td>
             </tr>

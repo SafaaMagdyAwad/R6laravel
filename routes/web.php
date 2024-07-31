@@ -100,9 +100,9 @@ Route::put('/class/{class}', [NewClassController::class, 'update'])->name('class
 Route::delete('/class/{class}', [NewClassController::class, 'destroy'])->name('class.destroy');
 Route::get('/class/{class}/edit', [NewClassController::class, 'edit'])->name('class.edit');
 
+Route::patch('restore/{class}',[NewClassController::class,'restore'])->withTrashed()->name('class.restore');
+Route::delete('forceDelete/{class}',[NewClassController::class,'forceDelete'])->withTrashed()->name('class.forceDelete');
 
-Route::patch('restore/{id}',[ClassController::class,'restore'])->name('class.restore');
-Route::delete('forceDelete/{id}',[ClassController::class,'forceDelete'])->name('class.forceDelete');
 
 
 

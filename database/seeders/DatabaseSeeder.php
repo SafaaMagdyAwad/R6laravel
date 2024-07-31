@@ -21,6 +21,11 @@ class DatabaseSeeder extends Seeder
             'password'=>bcrypt('123'),
         ]);
 
+        $this->call([
+            ClassSeeder::class,
+            
+        ]);
+
         //modelName::factory(number)->create();      لو كان في واحد تاني انا عملله create بنفسي 
     }
 }
