@@ -10,10 +10,7 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    private Car $car;
-    public function __construct(){
     
-    }
     public function index()
     {
         $cars=Car::all();
@@ -40,18 +37,13 @@ class CarController extends Controller
             'discription' => 'required',
             'price' => 'required',
         ]);
-        // dd($request->all());
+        $validatedData['published']=isset($request->published); 
        
         //create
-        Car::create([
-           'carTitle'=>$request->carTitle, 
-           'discription'=>$request->discription, 
-           'price'=>$request->price, 
-           'published'=>isset($request->published), 
-        ]);
+        Car::create($validatedData);
         //return
        
-        return $this->index();
+        return redirect()->route('car.index');
 
     }
 
@@ -81,16 +73,16 @@ class CarController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $car=Car::findOrFail($id);
-        if($car){
-            $car->carTitle=$request->carTitle;
-            $car->discription=$request->discription;
-            $car->price=$request->price;
-            $car->published=isset($request->published);
-
-            $car->save();
-        }
-        return $this->index();
+        $validatedData = $request->validate([
+            'carTitle' => 'required|string',
+            'discription' => 'required',
+            'price' => 'required',
+        ]);
+        $validatedData['published']=isset($request->published); 
+       
+        Car::findOrFail($id)->update($validatedData);
+        
+        return redirect()->route('car.index');
     }
 
     /**
@@ -100,7 +92,7 @@ class CarController extends Controller
     {
         //
         Car::where('id',$id)->delete();
-        return $this->index();
+        return redirect()->route('car.index');
 
     }
 
@@ -110,8 +102,8 @@ class CarController extends Controller
         return view('trashedCars',compact('cars'));
     }
     public function perminantDelete($id){
-        Car::where('id',$id)->forceDelete();
-        return $this->showDeleted();
+        Car::withTrashed()->where('id',$id)->forceDelete();
+        return redirect()->route('car.deleted');
 
     }
     public function restore(Car $car){

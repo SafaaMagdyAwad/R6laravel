@@ -28,7 +28,7 @@
           @csrf
           <div class="form-group mb-3 row">
             @error('className')
-          <div class="error">{{ $message }}</div>
+          <div class="alert alert-danger">{{ $message }}</div>
       @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">class Name:</label>
             <div class="col-md-10">

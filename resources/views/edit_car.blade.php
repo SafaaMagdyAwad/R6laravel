@@ -29,28 +29,38 @@
           @method('put')
 
           <div class="form-group mb-3 row">
+            @error('carTitle')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Car Title:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="BMW" name="carTitle" class="form-control py-2" value="{{$car->carTitle}}" />
+              <input type="text" placeholder="BMW" name="carTitle" class="form-control py-2" value="{{ old('carTitle', $car->carTitle) }}" />
+
             </div>
           </div>
           <div class="form-group mb-3 row">
+            @error('price')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" name="price" placeholder="Enter price" class="form-control py-2" value="{{$car->price}}" />
+              <input type="number" step="0.1" name="price" placeholder="Enter price" class="form-control py-2" value="{{ old('price', $car->price) }}" />
             </div>
           </div>
           <div class="form-group mb-3 row">
+            @error('discription')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
             <div class="col-md-10">
-              <textarea name="discription" id="" cols="30" rows="5" class="form-control py-2">{{$car->discription}}</textarea>
+              <textarea name="discription" id="" cols="30" rows="5" class="form-control py-2">{{ old('discription', $car->discription) }}</textarea>
             </div>
           </div>
           <hr>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
             <div class="col-md-10">
-              <input type="checkbox" name="published" class="form-check-input" style="padding: 0.7rem;"  @checked($car->published) />
+              <input type="checkbox" name="published" class="form-check-input" style="padding: 0.7rem;"  @checked( old('published', $car->published) ) />
             </div>
           </div>
           <div class="text-md-end">

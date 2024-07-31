@@ -27,28 +27,37 @@
         <form action="{{route('car.store')}}" method="post" class="px-md-5">
           @csrf
           <div class="form-group mb-3 row">
+            @error('carTitle')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Car Title:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="BMW" name="carTitle" class="form-control py-2" />
+              <input type="text" placeholder="BMW" name="carTitle" class="form-control py-2"  value="{{old('carTitle')}}"/>
             </div>
           </div>
           <div class="form-group mb-3 row">
+            @error('price')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" name="price" placeholder="Enter price" class="form-control py-2" />
+              <input type="number" step="0.1" name="price" placeholder="Enter price"  value="{{old('price')}}" class="form-control py-2" />
             </div>
           </div>
           <div class="form-group mb-3 row">
+            @error('discription')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
             <div class="col-md-10">
-              <textarea name="discription" id="" cols="30" rows="5" class="form-control py-2"></textarea>
+              <textarea name="discription" id="" cols="30" rows="5" class="form-control py-2"> {{old('discription')}}</textarea>
             </div>
           </div>
           <hr>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
             <div class="col-md-10">
-              <input type="checkbox" name="published" class="form-check-input" style="padding: 0.7rem;" />
+              <input type="checkbox" name="published" class="form-check-input" style="padding: 0.7rem;" @checked(old('published'))/>
             </div>
           </div>
           <div class="text-md-end">
