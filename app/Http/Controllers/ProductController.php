@@ -37,14 +37,14 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:20',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => [ 'required','decimal:0,3',new RangeRule(100,5000)],
             'discription' => 'required|string',
         ]);
         $image_name=isset($request->image)?$this->upload_file($request->image,'assets/images'):"null";
         $validatedData['image']=$image_name;
         Product::create($validatedData);
-        return redirect()->route('latest');
+        return redirect()->route('product.latest');
     }
 
     /**
