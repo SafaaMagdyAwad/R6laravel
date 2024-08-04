@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Car</title>
+  <title>edit Car</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,8 +23,8 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">Add Car</h2>
-        <form action="{{route('car.update',[$car['id']])}}" method="post" class="px-md-5">
+        <h2 class="fw-bold fs-2 mb-5 pb-2">edit Car</h2>
+        <form action="{{route('car.update',[$car['id']])}}" method="post" class="px-md-5" enctype="multipart/form-data">
           @csrf
           @method('put')
 
@@ -36,6 +36,21 @@
             <div class="col-md-10">
               <input type="text" placeholder="BMW" name="carTitle" class="form-control py-2" value="{{ old('carTitle', $car->carTitle) }}" />
 
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
+            @if ($car->image != "null")
+                  
+            <div class="col-3">
+              <img src="{{ asset('assets/images/' . $car->image) }}" alt="{{$car->className}}"   width="60" height="100" /> 
+            </div>
+            @endif
+            @error('image')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">car image:</label>
+            <div class="col-md-10">
+              <input type="file"  name="image" class="form-control py-2" />
             </div>
           </div>
           <div class="form-group mb-3 row">
@@ -60,7 +75,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
             <div class="col-md-10">
-              <input type="checkbox" name="published" class="form-check-input" style="padding: 0.7rem;"  @checked( old('published', $car->published) ) />
+              <input type="checkbox" name="published" class="form-check-input" style="padding: 0.7rem;" value="1"  @checked( old('published', $car->published) ) />
             </div>
           </div>
           <div class="text-md-end">

@@ -2,23 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\common;
 use App\Models\Classe;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ClassController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function upload_image( $image){
-
-        $file_extension = $image->getClientOriginalExtension();
-        $file_name = time() . '.' . $file_extension;
-        $path = 'assets/images';
-        $image->move($path, $file_name);
-        return $file_name;
-    }
+    use common;
     
     
     public function index()
@@ -52,7 +45,7 @@ class ClassController extends Controller
         ]);
         // dd($request->all());
         $validatedData['isFulled']=isset($request->isFulled);
-        $image_name=(empty($request->image ))?"null":$this->upload_image($request->image);
+        $image_name= !isset($request->image)?"null":$this->upload_file($request->image ,'assets/images');
         
         // dd($image_name);
 
@@ -100,12 +93,10 @@ class ClassController extends Controller
        $validatedData['isFulled']=isset($request->isFulled);
        $validatedData['timeFrom']=$request->timeFrom;
        // dd($validatedData);
-       $image_name=$request->hasFile('image')?$this->upload_image($request->image):$request->old_image;
+       $image_name=$request->hasFile('image')?$this->upload_file($request->image,'assets/images'):$request->old_image;
     //    dd($request->hasFile('image'));
        $validatedData['image']=$image_name;
-
         $class->update($validatedData);
-
         return redirect()->route('class.index');
     }
 

@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 class ExambleController extends Controller
 {
     //
+    public function index(){
+        return view('index');
+    }
     public function login(){
         return view('login');
     }

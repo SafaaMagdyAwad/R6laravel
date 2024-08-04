@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\common;
 use App\Models\Car;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,7 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    
+    use common;
     public function index()
     {
         $cars=Car::all();
@@ -34,11 +35,15 @@ class CarController extends Controller
          //validation
          $validatedData = $request->validate([
             'carTitle' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'discription' => 'required',
             'price' => 'required',
         ]);
+        $image_name= !isset($request->image)?"null":$this->upload_file($request->image ,'assets/images');
+        $validatedData['image']=$image_name;
+        
         $validatedData['published']=isset($request->published); 
-       
+        // dd($validatedData);
         //create
         Car::create($validatedData);
         //return
@@ -75,11 +80,14 @@ class CarController extends Controller
         //
         $validatedData = $request->validate([
             'carTitle' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'discription' => 'required',
             'price' => 'required',
         ]);
         $validatedData['published']=isset($request->published); 
-       
+        $image_name=$request->hasFile('image')?$this->upload_file($request->image,'assets/images'):$request->old_image;
+    //    dd($request->hasFile('image'));
+       $validatedData['image']=$image_name;
         Car::findOrFail($id)->update($validatedData);
         
         return redirect()->route('car.index');

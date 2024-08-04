@@ -34,7 +34,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">class Name:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="className" name="className" class="form-control py-2" value="{{$class->className}}"/>
+              <input type="text" placeholder="className" name="className" class="form-control py-2" value="{{old('className',$class->className)}}"/>
             </div>
           </div>
           <div class="form-group mb-3 row">
@@ -52,7 +52,7 @@
               <div class="col-9">
                 <label for="" class="form-label col-md-2 fw-bold text-md-end">class image:</label>
                 <div class="col-md-10">
-                  <input type="file"  name="image" class="form-control py-2"/>
+                  <input type="file"  name="image"  class="form-control py-2"/>
                 </div>
               </div>
             </div>
@@ -64,7 +64,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">capacity:</label>
             <div class="col-md-10">
-              <input type="number" step="1" name="capacity" placeholder="Enter capacity" class="form-control py-2" value="{{$class->capacity}}"/>
+              <input type="number" step="1" name="capacity" placeholder="Enter capacity" class="form-control py-2" value="{{old('capacity',$class->capacity)}}"/>
             </div>
           </div>
           @error('price')
@@ -73,7 +73,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" name="price" placeholder="Enter price" class="form-control py-2" value="{{$class->price}}" />
+              <input type="number" step="0.1" name="price" placeholder="Enter price" class="form-control py-2" value="{{old('price',$class->price)}}" />
             </div>
           </div>
           
@@ -85,7 +85,7 @@
             <label for="" class="form-label col-md-2 fw-bold text-md-end">isFulled:</label>
             <div class="col-md-10">
 
-              <input type="checkbox" name="isFulled" class="form-check-input" style="padding: 0.7rem;"    @checked($class->isFulled)  />
+              <input type="checkbox" name="isFulled" class="form-check-input" style="padding: 0.7rem;"  value="1"  @checked(old('isFulled',$class->isFulled))  />
             </div>
           </div>
           <hr>
@@ -95,7 +95,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time From:</label>
             <div class="col-md-10">
-              <input type="time" placeholder="timeFrom" name="timeFrom" class="form-control py-2" value="{{$class->timeFrom}}" />
+              <input type="time" placeholder="timeFrom" name="timeFrom" class="form-control py-2" value="{{old('timeFrom',$class->timeFrom)}}" />
             </div>
           </div>
           <hr>
@@ -105,7 +105,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time To:</label>
             <div class="col-md-10">
-              <input type="time" placeholder="timeTo" name="timeTo" class="form-control py-2" value="{{$class->timeTo}}" />
+              <input type="time" placeholder="timeTo" name="timeTo" class="form-control py-2" value="{{old('timeTo',$class->timeTo)}}" />
             </div>
           </div>
           <div class="text-md-end">
