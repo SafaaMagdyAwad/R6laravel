@@ -32,7 +32,7 @@
             @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">title:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="title" name="title" class="form-control py-2" />
+              <input type="text" placeholder="title" name="title" class="form-control py-2" value="{{old('title')}}" />
             </div>
           </div>
           <div class="form-group mb-3 row">
@@ -51,7 +51,7 @@
       @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
-              <input type="text" step="0.1" name="price" placeholder="Enter price" class="form-control py-2" />
+              <input type="text" step="0.1" name="price" placeholder="Enter price" class="form-control py-2"  value="{{old('price')}}"/>
             </div>
           </div>
           
