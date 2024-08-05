@@ -13,11 +13,13 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
     use common;
+
     public function index()
     {
         //all products
         $products=Product::orderBy('created_at','desc')->get();
-        return view('products',compact('products'));
+        $popular=Product::orderBy('like','desc')->get();
+        return view('products',compact('products','popular'));
     }
     public function latest(){
         
@@ -25,6 +27,12 @@ class ProductController extends Controller
         return view('index',compact('products'));
     }
 
+    public function like(Product $product){
+        $product->update([
+            'like'=>$product->like+1,
+        ]);
+        return redirect()->route('product.index');
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -46,6 +54,7 @@ class ProductController extends Controller
         ]);
         $image_name=$this->upload_file($request->image,'assets/images');
         $validatedData['image']=$image_name;
+        $validatedData['like']=0;
         Product::create($validatedData);
         return redirect()->route('product.latest');
     }

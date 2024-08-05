@@ -293,7 +293,7 @@ https://www.tooplate.com/view/2127-little-fashion
 
                                 <p class="lead mb-4">Credits go to Unsplash and FreePik websites for images used in this Little Fashion by Tooplate.</p>
 
-                                <a href="products.html" class="custom-link">
+                                <a href="{{route('product.index')}}" class="custom-link">
                                     Explore Products
                                     <i class="bi-arrow-right ms-2"></i>
                                 </a>
@@ -321,7 +321,9 @@ https://www.tooplate.com/view/2127-little-fashion
                                 <div class="product-top d-flex">
                                     <span class="product-alert me-auto">New Arrival</span>
 
-                                    <a href="#" class="bi-heart-fill product-icon"></a>
+                                    
+                                        <a href="{{route('product.like',$product)}}" class="bi-heart-fill product-icon"></a>
+                                    
                                 </div>
 
                                 <div class="product-info d-flex">

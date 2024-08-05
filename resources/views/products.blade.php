@@ -122,7 +122,7 @@ https://www.tooplate.com/view/2127-little-fashion
                                         </a>
     
                                         <div class="product-top d-flex">
-                                            <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                                            <a href="{{route('product.like',$product)}}" class="bi-heart-fill product-icon"></a>
                                         </div>
     
                                         <div class="product-info d-flex">
@@ -153,7 +153,7 @@ https://www.tooplate.com/view/2127-little-fashion
                             <h2 class="mb-5">Popular</h2>
                         </div>
 
-                        @foreach ($products as $product)
+                        @foreach ($popular as $product)
                             
                             <div class="col-lg-4 col-12">
                                 <div class="product-thumb">
@@ -162,7 +162,7 @@ https://www.tooplate.com/view/2127-little-fashion
                                     </a>
 
                                     <div class="product-top d-flex">
-                                        <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                                        <a href="{{route('product.like',$product)}}" class="bi-heart-fill product-icon"></a>
                                     </div>
 
                                     <div class="product-info d-flex">
