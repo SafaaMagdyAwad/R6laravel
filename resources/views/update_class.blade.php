@@ -85,6 +85,7 @@
             <label for="" class="form-label col-md-2 fw-bold text-md-end">isFulled:</label>
             <div class="col-md-10">
 
+              <input type="hidden" name="isFulled" class="form-check-input" style="padding: 0.7rem;"  value="0"   />
               <input type="checkbox" name="isFulled" class="form-check-input" style="padding: 0.7rem;"  value="1"  @checked(old('isFulled',$class->isFulled))  />
             </div>
           </div>

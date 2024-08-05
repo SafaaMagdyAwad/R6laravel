@@ -16,8 +16,11 @@ class ProductController extends Controller
     public function index()
     {
         //all products
+        $products=Product::orderBy('created_at','desc')->get();
+        return view('products',compact('products'));
     }
     public function latest(){
+        
         $products=Product::orderBy('created_at','desc')->limit(3)->get();
         return view('index',compact('products'));
     }
@@ -41,7 +44,7 @@ class ProductController extends Controller
             'price' => [ 'required','decimal:0,3',new RangeRule(100,5000)],
             'discription' => 'required|string',
         ]);
-        $image_name=isset($request->image)?$this->upload_file($request->image,'assets/images'):"null";
+        $image_name=$this->upload_file($request->image,'assets/images');
         $validatedData['image']=$image_name;
         Product::create($validatedData);
         return redirect()->route('product.latest');

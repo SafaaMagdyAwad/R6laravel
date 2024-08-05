@@ -343,7 +343,7 @@ https://www.tooplate.com/view/2127-little-fashion
                         
 
                         <div class="col-12 text-center">
-                            <a href="products.html" class="view-all">View All Products</a>
+                            <a href="{{route('product.index')}}" class="view-all">View All Products</a>
                         </div>
 
                     </div>

@@ -88,9 +88,9 @@ class ClassController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'capacity' => 'integer',
             'price' => 'decimal:0,3',
-            'timeTo' => '|after:timeFrom',
+            'timeTo' => 'after:timeFrom',
+            'isFulled' => 'boolean',
         ]);
-       $validatedData['isFulled']=isset($request->isFulled);
        $validatedData['timeFrom']=$request->timeFrom;
        // dd($validatedData);
        $image_name=$request->hasFile('image')?$this->upload_file($request->image,'assets/images'):$request->old_image;
