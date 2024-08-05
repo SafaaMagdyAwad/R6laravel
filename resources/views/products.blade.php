@@ -111,6 +111,48 @@ https://www.tooplate.com/view/2127-little-fashion
                             <h2 class="mb-5">New Arrivals</h2>
                         </div>
 
+                        <label hidden> {{$i=0;}}</label>
+                        @foreach ($products as $product)
+                            @if ($i<3)
+
+                                <div class="col-lg-4 col-12">
+                                    <div class="product-thumb">
+                                        <a href="product-detail.html">
+                                            <img src="{{asset('assets/images/'.$product->image)}}" class="img-fluid product-image" alt="">
+                                        </a>
+    
+                                        <div class="product-top d-flex">
+                                            <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                                        </div>
+    
+                                        <div class="product-info d-flex">
+                                            <div>
+                                                <h5 class="product-title mb-0">
+                                                    <a href="product-detail.html" class="product-title-link">{{$product->title}}</a>
+                                                </h5>
+    
+                                                <p class="product-p"> {{$product->discription}}  </p>
+                                            </div>
+    
+                                            <small class="product-price text-muted ms-auto">${{$product->price}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            <label hidden> {{$i++;}}</label>
+
+                            
+                                
+                            @endif
+                        @endforeach
+
+                        <div class="col-12">
+                            <h2 class="mb-5">Popular</h2>
+                        </div>
+
                         @foreach ($products as $product)
                             
                             <div class="col-lg-4 col-12">
@@ -137,36 +179,6 @@ https://www.tooplate.com/view/2127-little-fashion
                                 </div>
                             </div>
                         @endforeach
-
-                        {{-- <div class="col-12">
-                            <h2 class="mb-5">Popular</h2>
-                        </div>
-
-                        <div class="col-lg-4 col-12 mb-3">
-                            <div class="product-thumb">
-                                <a href="product-detail.html">
-                                    <img src="{{asset('assets/images/product/team-fredi-8HRKoay8VJE-unsplash.jpeg')}}" class="img-fluid product-image" alt="">
-                                </a>
-
-                                <div class="product-top d-flex">
-                                    <span class="product-alert">Trending</span>
-
-                                    <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                                </div>
-
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="product-detail.html" class="product-title-link">Package</a>
-                                        </h5>
-
-                                        <p class="product-p">Original package design from house</p>
-                                    </div>
-
-                                    <small class="product-price text-muted ms-auto">$50</small>
-                                </div>
-                            </div>
-                        </div> --}}
 
                       
                     </div>
