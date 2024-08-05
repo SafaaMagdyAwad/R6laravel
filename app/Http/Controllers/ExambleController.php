@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 class ExambleController extends Controller
 {
     //
-    // public function index(){
-    //     $products=Product::orderBy('created_at','desc')->limit(3)->get();
-    //     return view('index',compact('products'));
-    // }
+    public function index(){
+        $products=Product::orderBy('created_at','desc')->limit(3)->get();
+        return view('index',compact('products'));
+    }
     public function login(){
         return view('login');
     }

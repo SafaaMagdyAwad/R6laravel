@@ -144,3 +144,4 @@ Route::prefix('class')->name('class.')->group(function () {
 
 Route::resource('product',ProductController::class);
 Route::get('latest',[ProductController::class,'latest'])->name('product.latest');
+Route::get('index',[ExambleController::class,'index'])->name('index');
