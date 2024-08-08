@@ -2,7 +2,7 @@
 
 namespace App;
 
-trait common
+trait Common
 {
     
     public function upload_file( $file, $path){
