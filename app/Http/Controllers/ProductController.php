@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\common;
+use App\Common;
 use App\Models\Product;
 use App\Rules\RangeRule;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    use common;
+    use Common;
 
     public function index()
     {
@@ -21,6 +21,7 @@ class ProductController extends Controller
         $popular=Product::orderBy('like','desc')->get();
         return view('products',compact('products','popular'));
     }
+
     public function latest(){
         
         $products=Product::orderBy('created_at','desc')->limit(3)->get();
@@ -40,6 +41,10 @@ class ProductController extends Controller
     {
         return view('add_product');
     }
+    public function about()
+    {
+        return view('about');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -52,7 +57,7 @@ class ProductController extends Controller
             'price' => [ 'required','decimal:0,3',new RangeRule(100,5000)],
             'discription' => 'required|string',
         ]);
-        $image_name=$this->upload_file($request->image,'assets/images');
+        $image_name=$this->upload_file($request->image,'assets/images/product');
         $validatedData['image']=$image_name;
         $validatedData['like']=0;
         Product::create($validatedData);
@@ -70,17 +75,27 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        return view('editProduct',compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:20',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'price' => [ 'required','decimal:0,3',new RangeRule(100,5000)],
+            'discription' => 'required|string',
+        ]);
+        $validatedData['like']=$product->like;
+        $validatedData['image']=$request->hasFile('image')?$this->upload_file($request->image,'assets/images/product'):$product->image;
+        // dd($validatedData);
+        $product->update($validatedData);
+        return redirect()->route('product.index');
     }
 
     /**

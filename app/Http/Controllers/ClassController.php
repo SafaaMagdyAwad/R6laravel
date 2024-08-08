@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\common;
+use App\Common as AppCommon;
 use App\Models\Classe;
 use Illuminate\Http\Request;
 
@@ -11,7 +11,7 @@ class ClassController extends Controller
     /**
      * Display a listing of the resource.
      */
-    use common;
+    use AppCommon;
     
     
     public function index()

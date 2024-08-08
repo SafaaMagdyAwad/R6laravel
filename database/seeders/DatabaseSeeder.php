@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,19 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
+        Product::factory(100)->create();
 
-        User::factory()->create([
-            'name'=>'Test User',
-            'email'=>'test@example.com',
-            'password'=>bcrypt('123'),
-        ]);
+        // User::factory()->create([
+        //     'name'=>'Test User',
+        //     'email'=>'test@example.com',
+        //     'password'=>bcrypt('123'),
+        // ]);
 
-        $this->call([
-            ClassSeeder::class,
-            
-        ]);
+       
 
-        //modelName::factory(number)->create();      لو كان في واحد تاني انا عملله create بنفسي 
     }
 }
