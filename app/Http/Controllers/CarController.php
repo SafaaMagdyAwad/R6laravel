@@ -38,6 +38,7 @@ class CarController extends Controller
          //validation
          $validatedData = $request->validate([
             'carTitle' => 'required|string',
+            'category_id' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'discription' => 'required',
             'price' => 'required',
