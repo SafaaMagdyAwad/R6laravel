@@ -24,10 +24,44 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">all products</h2>
-        
+        <table class="table table-hover">
+          <thead>
+            <tr class="table-dark">
+              <th scope="col"> Title</th>
+              <th scope="col">image</th>
+              <th scope="col">like</th>
+              <th scope="col">price</th>
+              <th scope="col">discription</th>
+              <th scope="col">View</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
             @foreach ($products as $product)
-                <p>{{$product->title}}</p>
+            <tr>
+              <td scope="row">{{$product->title}}</td>
+              <td> <img src="{{ asset('assets/images/product/' . $product->image) }}" 
+                alt="{{$product->title}}" class="card-img"
+                  width="50" height="100" /></td>
+              <td>{{$product->like}} Likes</td>
+              <td>{{$product->price}} $</td>
+              <td>{{Str::limit($product->discription, 25, '...')}}</td>
+              <td><a href="{{route('product.show',$product)}}">View</a></td>
+              <td><a href="{{route('product.edit',$product)}}">Edit</a></td>
+              <td>
+                <form method="POST" action="{{route('product.destroy',$product)}}">
+                  @csrf
+                  @method('delete')
+                  <button onclick="confirm('Are you sure you want to delete?')"> delete</button>
+                </form>
+              </td>
+            </tr>
             @endforeach
+           
+          
+          </tbody>
+        </table>
         </div>
     </div>
   </main>

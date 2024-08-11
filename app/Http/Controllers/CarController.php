@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // use App\common;
 use App\Common as AppCommon;
 use App\Models\Car;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -25,7 +26,8 @@ class CarController extends Controller
     public function create()
     {
         //
-        return view('add_car');
+        $categories=Category::all();
+        return view('add_car',compact('categories'));
     }
 
     /**
@@ -36,6 +38,7 @@ class CarController extends Controller
          //validation
          $validatedData = $request->validate([
             'carTitle' => 'required|string',
+            'category_id' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'discription' => 'required',
             'price' => 'required',

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Models\Student;
+use Illuminate\Support\Facades\DB;
+
+// use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
@@ -36,5 +39,14 @@ class PublicController extends Controller
     }
     public function contact(){
         return view('contactpage');
+    }
+
+    public function test(){
+        // dd(Student::find(1)?->phone);
+        // dd(Student::find(1)?->phone->phone_number);
+        dd(DB::table('students')
+        ->join('phones', 'phones.id', '=', 'students.phone_id')
+        ->where('students.id', '=', 1)
+        ->first());
     }
 }

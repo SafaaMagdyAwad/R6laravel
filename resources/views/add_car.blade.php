@@ -36,6 +36,21 @@
             </div>
           </div>
           <div class="form-group mb-3 row">
+            @error('category_id')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Car category:</label>
+            <div class="col-md-10">
+              <select name="category_id" class="form-control">
+
+                @foreach ($categories as $item)
+                    <option value="{{$item->id}}">{{$item->category}}</option>
+                @endforeach
+              </select>
+
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
             @error('image')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

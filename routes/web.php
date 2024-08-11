@@ -156,3 +156,6 @@ Route::get('contact',[PublicController::class,'contact'])->name('public.contact'
 
 Route::get('product/{product}/detail',[PublicController::class,'productDetail'])->name('public.productDetail');
 Route::get('like/{product}',[PublicController::class,'like'])->name('public.like');
+
+
+Route::get('test',[PublicController::class,'test']);
