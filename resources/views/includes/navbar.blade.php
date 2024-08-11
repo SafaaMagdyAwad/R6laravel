@@ -5,43 +5,43 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{{route('public.index')}}">
             <strong><span>Little</span> Fashion</strong>
         </a>
 
         <div class="d-lg-none">
-            <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+            <a href="{{route('login')}}" class="bi-person custom-icon me-3"></a>
 
-            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+            {{-- <a href="{{route('public.productDetail',$product)}}" class="bi-bag custom-icon"></a> --}}
         </div>
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="index.html">Home</a>
+                    <a class="nav-link active" href="{{route('public.index')}}">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">Story</a>
+                    <a class="nav-link" href="{{route('public.about')}}">Story</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="products.html">Products</a>
+                    <a class="nav-link" href="{{route('public.products')}}">Products</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="faq.html">FAQs</a>
+                    <a class="nav-link" href="{{route('public.faq')}}">FAQs</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="{{route('public.contact')}}">Contact</a>
                 </li>
             </ul>
 
             <div class="d-none d-lg-block">
-                <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+                <a href="{{route('login')}}" class="bi-person custom-icon me-3"></a>
 
-                <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                {{-- <a href="{{route('public.productDetail',$product)}}" class="bi-bag custom-icon"></a> --}}
             </div>
         </div>
     </div>

@@ -55,7 +55,7 @@
               </div>
             
               <div class="text-md-end">
-                <a href="{{route('product.index')}}" class="btn mt-4 btn-primary text-white fs-5 fw-bold border-0 py-2 px-md-5">
+                <a href="{{route('public.products')}}" class="btn mt-4 btn-primary text-white fs-5 fw-bold border-0 py-2 px-md-5">
                   Back to All products
                 </a>
               </div>

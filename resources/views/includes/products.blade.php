@@ -12,18 +12,18 @@
 
                     <div class="col-lg-4 col-12">
                         <div class="product-thumb">
-                            <a href="product-detail.html">
+                            <a href="{{route('public.productDetail',$product)}}">
                                 <img src="{{asset('assets/images/product/'.$product->image)}}" class="img-fluid product-image" alt="">
                             </a>
 
                             <div class="product-top d-flex">
-                                <a href="{{route('product.like',$product)}}" class="bi-heart-fill product-icon"></a>
+                                <a href="{{route('public.like',$product)}}" class="bi-heart-fill product-icon"></a>
                             </div>
 
                             <div class="product-info d-flex">
                                 <div>
                                     <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">{{$product->title}}</a>
+                                        <a href="{{route('public.productDetail',$product)}}" class="product-title-link">{{$product->title}}</a>
                                     </h5>
 
                                     <p class="product-p"> {{$product->discription}}  </p>
@@ -52,18 +52,18 @@
                 
                 <div class="col-lg-4 col-12">
                     <div class="product-thumb">
-                        <a href="product-detail.html">
+                        <a href="{{route('public.productDetail',$product)}}">
                             <img src="{{asset('assets/images/product/'.$product->image)}}" class="img-fluid product-image" alt="">
                         </a>
 
                         <div class="product-top d-flex">
-                            <a href="{{route('product.like',$product)}}" class="bi-heart-fill product-icon"></a>
+                            <a href="{{route('public.like',$product)}}" class="bi-heart-fill product-icon"></a>
                         </div>
 
                         <div class="product-info d-flex">
                             <div>
                                 <h5 class="product-title mb-0">
-                                    <a href="product-detail.html" class="product-title-link">{{$product->title}}</a>
+                                    <a href="{{route('public.productDetail',$product)}}" class="product-title-link">{{$product->title}}</a>
                                 </h5>
 
                                 <p class="product-p"> {{$product->discription}}  </p>

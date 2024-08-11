@@ -16,36 +16,16 @@ class ProductController extends Controller
 
     public function index()
     {
-        //all products
         $products=Product::orderBy('created_at','desc')->get();
-        $popular=Product::orderBy('like','desc')->get();
-        return view('products',compact('products','popular'));
-    }
-
-    public function latest(){
-        
-        $products=Product::orderBy('created_at','desc')->limit(3)->get();
-        return view('index',compact('products'));
-    }
-
-    public function like(Product $product){
-        $product->update([
-            'like'=>$product->like+1,
-        ]);
-        return redirect()->route('product.index');
+        return view('admin.index',compact('products'));
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('add_product');
+        return view('admin.add_product');
     }
-    public function about()
-    {
-        return view('about');
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -61,7 +41,7 @@ class ProductController extends Controller
         $validatedData['image']=$image_name;
         $validatedData['like']=0;
         Product::create($validatedData);
-        return redirect()->route('product.latest');
+        return redirect()->route('product.index');
     }
 
     /**
@@ -77,7 +57,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('editProduct',compact('product'));
+        return view('admin.editProduct',compact('product'));
     }
 
     /**

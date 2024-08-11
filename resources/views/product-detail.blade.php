@@ -1,0 +1,9 @@
+@extends('layout.app')
+@section('content')
+@include('includes.header')
+@include('includes.product-detail')
+@include('includes.related-product')
+@include('includes.footer')
+@include('includes.cart-modal')
+@include('includes.footerjs')
+@endsection

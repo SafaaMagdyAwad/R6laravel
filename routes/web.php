@@ -5,6 +5,7 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ExambleController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -121,18 +122,18 @@ Route::prefix('car')->group(
 //     }
 // );
 
-Route::prefix('class')->name('class.')->group(function () {
+Route::prefix('class')->name('class')->group(function () {
     Route::controller(ClassController::class)->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::post('',  'store')->name('store');
-        Route::get('create', 'create')->name('create');
-        Route::get('deleted', 'showDeleted')->name('deleted');
-        Route::get('{class}', 'show')->name('show');
-        Route::put('{class}', 'update')->name('update');
-        Route::delete('{class}', 'destroy')->name('destroy');
-        Route::get('{class}/edit', 'edit')->name('edit');
-        Route::patch('{class}/restore', 'restore')->withTrashed()->name('restore');
-        Route::delete('{class}/forceDelete', 'forceDelete')->withTrashed()->name('forceDelete');
+        Route::get('', 'index')->name('.index');
+        Route::post('',  'store')->name('.store');
+        Route::get('create', 'create')->name('.create');
+        Route::get('deleted', 'showDeleted')->name('.deleted');
+        Route::get('{class}', 'show')->name('.show');
+        Route::put('{class}', 'update')->name('.update');
+        Route::delete('{class}', 'destroy')->name('.destroy');
+        Route::get('{class}/edit', 'edit')->name('.edit');
+        Route::patch('{class}/restore', 'restore')->withTrashed()->name('.restore');
+        Route::delete('{class}/forceDelete', 'forceDelete')->withTrashed()->name('.forceDelete');
     });
 });
 
@@ -142,8 +143,16 @@ Route::prefix('class')->name('class.')->group(function () {
 
 
 
-Route::resource('product',ProductController::class);
-Route::get('latest',[ProductController::class,'latest'])->name('product.latest');
-Route::get('about',[ProductController::class,'about'])->name('product.about');
-Route::get('like/{product}',[ProductController::class,'like'])->name('product.like');
-Route::get('index',[ExambleController::class,'index'])->name('index');
+Route::resource('product',ProductController::class);// admin functions
+
+
+Route::get('index',[PublicController::class,'index'])->name('public.index');
+Route::get('about',[PublicController::class,'about'])->name('public.about');
+Route::get('products',[PublicController::class,'products'])->name('public.products');
+
+
+Route::get('faq',[PublicController::class,'faq'])->name('public.faq');
+Route::get('contact',[PublicController::class,'contact'])->name('public.contact');
+
+Route::get('product/{product}/detail',[PublicController::class,'productDetail'])->name('public.productDetail');
+Route::get('like/{product}',[PublicController::class,'like'])->name('public.like');

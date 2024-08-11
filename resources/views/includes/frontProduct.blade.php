@@ -14,7 +14,7 @@
 
                     <p class="lead mb-4">Credits go to Unsplash and FreePik websites for images used in this Little Fashion by Tooplate.</p>
 
-                    <a href="{{route('product.index')}}" class="custom-link">
+                    <a href="{{route('public.products')}}" class="custom-link">
                         Explore Products
                         <i class="bi-arrow-right ms-2"></i>
                     </a>
