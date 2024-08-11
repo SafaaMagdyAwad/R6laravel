@@ -47,7 +47,7 @@
               <select name="category_id" class="form-control">
 
                 @foreach ($categories as $item)
-                    <option value="{{old('category_id',$item->id)}}"  @selected($car->category_id== $item->id)>{{$item->category}}</option>
+                    <option value="{{$item->id}}"  @selected($car->category_id== $item->id)>{{$item->category}}</option>
                 @endforeach
               </select>
 
@@ -65,6 +65,7 @@
             @enderror
             <label for="" class="form-label col-md-2 fw-bold text-md-end">car image:</label>
             <div class="col-md-10">
+              <input type="hidden"  name="old_image" value="{{$car->image}}" class="form-control py-2" />
               <input type="file"  name="image" class="form-control py-2" />
             </div>
           </div>
