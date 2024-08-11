@@ -47,7 +47,7 @@
               <select name="category_id" class="form-control">
 
                 @foreach ($categories as $item)
-                    <option value="{{$item->id}}" {{($car->category_id== $item->id)?"selected": "" }}>{{$item->category}}</option>
+                    <option value="{{old('category_id',$item->id)}}"  @selected($car->category_id== $item->id)>{{$item->category}}</option>
                 @endforeach
               </select>
 
@@ -57,7 +57,7 @@
             @if ($car->image != "null")
                   
             <div class="col-3">
-              <img src="{{ asset('assets/images/' . $car->image) }}" alt="{{$car->className}}"   width="60" height="100" /> 
+              <img src="{{ asset('assets/images/car/' . $car->image) }}" alt="{{$car->carTitle}}"   width="60" height="100" /> 
             </div>
             @endif
             @error('image')

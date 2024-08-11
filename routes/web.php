@@ -96,12 +96,12 @@ Route::prefix('car')->group(
         Route::post('',[CarController::class,'store'])->name('car.store');
         Route::get('create',[CarController::class,'create'])->name('car.create');
         Route::get('deleted',[CarController::class,'showDeleted'])->name('cars.deleted');
-        Route::get('{id}',[CarController::class,'show'])->name('car.show');
-        Route::put('{id}',[CarController::class,'update'])->name('car.update');
-        Route::delete('{id}',[CarController::class,'destroy'])->name('car.destroy');//soft delete
-        Route::patch('{id}', [CarController::class, 'restore'])->name('car.restore');
-        Route::get('{id}/edit',[CarController::class,'edit'])->name('car.edit');
-        Route::delete('{id}/perminant',[CarController::class,'perminantDelete'])->name('car.perminantDelete');
+        Route::get('{car}',[CarController::class,'show'])->name('car.show');
+        Route::put('{car}',[CarController::class,'update'])->name('car.update');
+        Route::delete('{car}',[CarController::class,'destroy'])->name('car.destroy');//soft delete
+        Route::patch('{car}', [CarController::class, 'restore'])->name('car.restore');
+        Route::get('{car}/edit',[CarController::class,'edit'])->name('car.edit');
+        Route::delete('{car}/perminant',[CarController::class,'perminantDelete'])->name('car.perminantDelete');
     }    
 );    
 
@@ -159,3 +159,15 @@ Route::get('like/{product}',[PublicController::class,'like'])->name('public.like
 
 
 Route::get('test',[PublicController::class,'test']);
+
+
+
+// Route::get('/download', function (Illuminate\Http\Request $request) {
+//     $file = $request->input('file');
+//     $path = public_path('assets/images/' . $file);
+//     if (file_exists($path)) {
+//         return response()->download($path);
+//     } else {
+//         abort(404, 'File not found');
+//     }
+// }); ifpath starts with .../assets/images

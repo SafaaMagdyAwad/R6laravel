@@ -14,6 +14,8 @@ class CarController extends Controller
      * Display a listing of the resource.
      */
     use AppCommon;
+
+    
     public function index()
     {
         $cars=Car::all();
@@ -25,8 +27,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
         $categories=Category::all();
+        
         return view('add_car',compact('categories'));
     }
 
@@ -43,7 +45,7 @@ class CarController extends Controller
             'discription' => 'required',
             'price' => 'required',
         ]);
-        $image_name= !isset($request->image)?"null":$this->upload_file($request->image ,'assets/images');
+        $image_name= !isset($request->image)?"null":$this->upload_file($request->image ,'assets/images/car');
         $validatedData['image']=$image_name;
         
         $validatedData['published']=isset($request->published); 
@@ -59,40 +61,45 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($car)
+    public function show(Car $car)
     {
+        // dd($car);
         return view('car',compact('car'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Car $car)
     {
         //
-        $car=Car::findOrFail($id);
+        // $car=Car::findOrFail($id);
         // dd($car['id']);
-        return view('edit_car',compact('car'));
+        $categories=Category::all();
+
+        return view('edit_car',compact('car','categories'));
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,Car $car)
     {
         //
         $validatedData = $request->validate([
             'carTitle' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_id' => 'required',
             'discription' => 'required',
             'price' => 'required',
         ]);
         $validatedData['published']=isset($request->published); 
-        $image_name=$request->hasFile('image')?$this->upload_file($request->image,'assets/images'):$request->old_image;
+        $image_name=$request->hasFile('image')?$this->upload_file($request->image,'assets/images/car'):$request->old_image;
     //    dd($request->hasFile('image'));
        $validatedData['image']=$image_name;
-        Car::findOrFail($id)->update($validatedData);
+    //    dd($validatedData);
+        $car->update($validatedData);
         
         return redirect()->route('car.index');
     }
@@ -100,10 +107,10 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Car $car)
     {
         //
-        Car::where('id',$id)->delete();
+        $car->delete();
         return redirect()->route('car.index');
 
     }
