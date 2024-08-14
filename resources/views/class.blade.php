@@ -31,7 +31,7 @@
             @if ($class->image !="null")
                   
             <div class="col-lg-4 col-md-6 col-10 position-relative overflow-hidden">
-              <img src="{{ asset('assets/images/' . $class->image) }}" 
+              <img src="{{ asset('assets/images/class/' . $class->image) }}" 
               alt="" class="card-img"
                 style="position: absolute; margin: auto; top: 50%; transform: translateY(-50%); width: 100%;height: 100%; object-fit: cover;" />
             </div>

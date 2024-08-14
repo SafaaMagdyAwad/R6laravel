@@ -3,22 +3,20 @@
 namespace App\Http\Controllers;
 
 // use App\common;
-use App\Common as AppCommon;
 use App\Models\Car;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CarController extends Controller
+class CarController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
-    use AppCommon;
-
+   
     
     public function index()
     {
-        $cars=Car::all();
+        $cars=$this->getAll(Car::class);
         return view('cars',compact('cars'));
     }
 
@@ -26,9 +24,9 @@ class CarController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        $categories=Category::all();
-        
+    {        
+        $categories=$this->getAll(Category::class);
+
         return view('add_car',compact('categories'));
     }
 
@@ -37,23 +35,8 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-         //validation
-         $validatedData = $request->validate([
-            'carTitle' => 'required|string',
-            'category_id' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'discription' => 'required',
-            'price' => 'required',
-        ]);
-        $image_name= !isset($request->image)?"null":$this->upload_file($request->image ,'assets/images/car');
-        $validatedData['image']=$image_name;
-        
-        $validatedData['published']=isset($request->published); 
-        // dd($validatedData);
-        //create
-        Car::create($validatedData);
+        $this->baseStore($request,Car::class,"car");
         //return
-       
         return redirect()->route('car.index');
 
     }
@@ -63,7 +46,6 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        // dd($car);
         return view('car',compact('car'));
     }
 
@@ -72,35 +54,16 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
-        // $car=Car::findOrFail($id);
-        // dd($car['id']);
-        $categories=Category::all();
-
+        $categories=$this->getAll(Category::class);
         return view('edit_car',compact('car','categories'));
-
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request,Car $car)
-    {
-        //
-        $validatedData = $request->validate([
-            'carTitle' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'category_id' => 'required',
-            'discription' => 'required',
-            'price' => 'required',
-        ]);
-        $validatedData['published']=isset($request->published); 
-        $image_name=$request->hasFile('image')?$this->upload_file($request->image,'assets/images/car'):$request->old_image;
-    //    dd($request->hasFile('image'));
-       $validatedData['image']=$image_name;
-    //    dd($validatedData);
-        $car->update($validatedData);
-        
+    { 
+        $this->baseUpdate($request,$car,"car");
         return redirect()->route('car.index');
     }
 
@@ -110,26 +73,23 @@ class CarController extends Controller
     public function destroy(Car $car)
     {
         //
-        $car->delete();
+        $this->baseDelete($car);
         return redirect()->route('car.index');
 
     }
 
 
     public function showDeleted(){
-        $cars=Car::onlyTrashed()->get();
+        $cars=$this->baseDeleted(Car::class);
         return view('trashedCars',compact('cars'));
     }
-    public function perminantDelete($id){
-        Car::withTrashed()->where('id',$id)->forceDelete();
-        return redirect()->route('car.deleted');
+    public function perminantDelete(Car $car){
+        $car->forceDelete();
+        return redirect()->route('cars.deleted');
 
     }
     public function restore(Car $car){
-       
-        // dd("safaa");
-        $car->withTrashed()
-        ->restore();
+        $car->restore();
         return redirect()->route('cars.deleted');
     }
 }

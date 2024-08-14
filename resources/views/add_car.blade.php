@@ -43,8 +43,8 @@
             <div class="col-md-10">
               <select name="category_id" class="form-control">
 
-                @foreach ($categories as $item)
-                    <option value="{{$item->id}}">{{$item->category}}</option>
+                @foreach ($categories as $category)
+                    <option value="{{$category->id}}" @selected(old('category_id') == $category->id)>{{$category->category}}</option>
                 @endforeach
               </select>
 

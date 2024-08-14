@@ -101,7 +101,8 @@ Route::prefix('car')->group(
         Route::delete('{car}',[CarController::class,'destroy'])->name('car.destroy');//soft delete
         Route::patch('{car}', [CarController::class, 'restore'])->name('car.restore');
         Route::get('{car}/edit',[CarController::class,'edit'])->name('car.edit');
-        Route::delete('{car}/perminant',[CarController::class,'perminantDelete'])->name('car.perminantDelete');
+        Route::delete('{car}/perminant',[CarController::class,'perminantDelete'])->withTrashed()->name('car.perminantDelete');
+        Route::patch('{car}/restore',[CarController::class,'restore'])->withTrashed()->name('car.restore');
     }    
 );    
 

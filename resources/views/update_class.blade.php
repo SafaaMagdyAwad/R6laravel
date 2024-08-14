@@ -45,7 +45,7 @@
               @if ($class->image != "null")
                   
               <div class="col-3">
-                <img src="{{ asset('assets/images/' . $class->image) }}" alt="{{$class->className}}"   width="60" height="100" /> 
+                <img src="{{ asset('assets/images/class/' . $class->image) }}" alt="{{$class->className}}"   width="60" height="100" /> 
               </div>
               @endif
            
