@@ -90,7 +90,7 @@ Route::post('contactPost',[ContactController::class,'contactPost'])->name('conta
 //     });
 // });
 
-Route::prefix('car')->group(
+Route::prefix('car')->middleware('verified')->group(
     function(){
         Route::get('',[CarController::class,'index'])->name('car.index');
         Route::post('',[CarController::class,'store'])->name('car.store');
@@ -172,3 +172,7 @@ Route::get('test',[PublicController::class,'test']);
 //         abort(404, 'File not found');
 //     }
 // }); ifpath starts with .../assets/images
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -16,7 +16,7 @@ class CarController extends BaseController
     
     public function index()
     {
-        $cars=$this->getAll(Car::class);
+        $cars=Car::with('category')->get();
         return view('cars',compact('cars'));
     }
 
@@ -44,10 +44,13 @@ class CarController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(Car $car)
+    public function show(String $id)
     {
+        $car=Car::with('category')->findOrFail($id);
+        // dd($car);//
         return view('car',compact('car'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.

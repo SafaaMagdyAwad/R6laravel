@@ -31,6 +31,7 @@
               <th scope="col">Price</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
+              <th scope="col">Category</th>
               <th scope="col">View</th>
               <th scope="col">Edit</th>
               <th scope="col">Delete</th>
@@ -43,6 +44,7 @@
               <td>{{$car['price']}}</td>
               <td>{{Str::limit($car['discription'], 25, '...')}}</td>
               <td>{{$car['published']?"YES":"NO"}}</td>
+              <td>{{$car->category->category}}</td>
               <td><a href="{{route('car.show',$car)}}">View</a></td>
               <td><a href="{{route('car.edit',$car)}}">Edit</a></td>
               <td>
