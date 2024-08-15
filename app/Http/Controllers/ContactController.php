@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -11,9 +13,15 @@ class ContactController extends Controller
         return view('contact');
     }
     public function contactPost(Request $request){
-        return "name is ". $request->name.
-        "<br> email is ". $request->email.
-        "<br> subject is ". $request->subject.
-        "<br> message is ". $request->message;
+        $data = $request->validate([
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+            'email' => 'required|email',
+        ]);
+        // dd($data);
+        // dd($data['subject']);
+        Mail::to($data['email'])->send(new Contact($data['subject'], $data['message']));
+    
+        return redirect()->route('start');
     }
 }

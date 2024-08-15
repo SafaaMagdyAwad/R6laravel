@@ -68,6 +68,7 @@ Route::get('image',[ExambleController::class,'imageForm'])->name('imageForm');
 Route::post('image',[ExambleController::class,'image'])->name('image');
 
 
+
 Route::get('contact',[ContactController::class,'contact'])->name('contact');
 Route::post('contactPost',[ContactController::class,'contactPost'])->name('contactPost');
 
@@ -153,7 +154,7 @@ Route::get('products',[PublicController::class,'products'])->name('public.produc
 
 
 Route::get('faq',[PublicController::class,'faq'])->name('public.faq');
-Route::get('contact',[PublicController::class,'contact'])->name('public.contact');
+// Route::get('contact',[PublicController::class,'contact'])->name('public.contact');
 
 Route::get('product/{product}/detail',[PublicController::class,'productDetail'])->name('public.productDetail');
 Route::get('like/{product}',[PublicController::class,'like'])->name('public.like');
