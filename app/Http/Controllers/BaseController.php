@@ -3,74 +3,117 @@
 namespace App\Http\Controllers;
 
 use App\Common;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
-    //
     use Common;
-    private $imgRoute;
-    public function __construct(){
-        $this->imgRoute='assets/images/';
-    }
-    public function baseCarValidation($request,$img){
-        $validatedData = $request->validate([
-            'carTitle' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-            'image' => $img.'|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'discription' => 'required|string',
-            'price' => 'required|decimal:0,2',
-        ]);
-        $validatedData['published']=isset($request->published); 
-        return $validatedData;
-    }
-    public function baseClassValidation($request,$img){
-        $validatedData = $request->validate([
-            'className' => 'required|string|max:50',
-            'image' => $img.'|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'capacity' => 'required|integer',
-            'price' => 'required|decimal:0,3',
-            'timeFrom' => 'required',
-            'timeTo' => 'required|after:timeFrom',
-        ]);
-        // dd($request->all());
-        $validatedData['isFulled']=isset($request->isFulled);
-        return $validatedData;
-    }
 
-    public function getAll($model){
-        return $model::all();
-    }
-    
-    public function baseCreate($model,$validatedData){
-        return $model::create($validatedData);
-    }
+    // when you find yourself write static code in construct
+    // just assign the value to property direct
 
-    public function baseStore($request,$model,$object){
-         if($object=="car"){
-            $validatedData=$this->baseCarValidation($request,'required');
-        }elseif($object=="class"){
-            $validatedData=$this->baseClassValidation($request,'required');
+    // where to store files
+    protected string $filesPath = "assets/images";
+    // name of file in the frontend
+    protected string $fileName = "image";
+    protected string $model = '';
+
+    //  if there is a relation with another model
+    protected string $relationModel = '';
+    protected string $relations = '';
+
+    // columns to create and update
+    protected array $columns = [];
+
+    public function index(): View
+    {
+        $model = new $this->model;
+
+        if($this->relations !== '') {
+            $model = $model::with($this->relations);
         }
-         $validatedData['image']=$this->upload_file($request->image ,$this->imgRoute.$object);
 
-         $this->baseCreate($model,$validatedData);
+        $data = $model->get();
+
+        return view($this->getViewName('index'), compact('data'));
     }
 
-    public function baseUpdate($request,$updated_item,$object){
-        if($object=="car"){
-            $validatedData=$this->baseCarValidation($request,'nullable');
-        }elseif($object=="class"){
-            $validatedData=$this->baseClassValidation($request,'nullable');
+    public function create(): View
+    {
+        $relationData = '';
+
+        if($this->relationModel !== '') {
+            $relationData = $this->relationModel::get();
         }
-        $validatedData['image']=$request->hasFile('image')?$this->upload_file($request->image,$this->imgRoute.$object):$request->old_image;
-        $updated_item->update($validatedData);
+        
+        return view($this->getViewName('create'), compact('relationData'));
     }
-    public function baseDelete($element){
-        $element->delete();
+
+    public function store(Request $request): RedirectResponse
+    {
+        // check if request is coming with file
+        $data = $this->checkRequestForFiles($request);
+
+        $this->model::create($data);
+        return redirect()->route($this->getViewName('index'));
     }
-    public function baseDeleted($model){
-        return $model::onlyTrashed()->get();
+
+    public function show(String $id): View
+    {
+        $model = new $this->model;
+
+        if($this->relations !== '') {
+            $model = $model::with($this->relations);
+        }
+
+        $data = $model->findOrFail($id);
+        return view($this->getViewName('show'), compact('data'));
+    }
+
+    public function edit(String $id): View
+    {
+        $data = $this->model::findOrFail($id);
+        $relationData = '';
+
+        if($this->relationModel !== '') {
+            $relationData = $this->relationModel::get();
+        }
+
+        return view($this->getViewName('edit'), compact('data', 'relationData'));
+    }
+
+    public function update(Request $request, String $id): RedirectResponse
+    {
+        $data = $this->checkRequestForFiles($request);
+
+        $this->model::where('id', $id)->update($data);
+        return redirect()->route($this->getViewName('index'));
+    }
+
+    public function destroy(String $id): RedirectResponse
+    {
+        $this->model::where('id', $id)->delete();
+        return redirect()->route($this->getViewName('index'));
+    }
+
+    protected function getViewName($action)
+    {
+        return strtolower(class_basename($this->model)) . '.' . $action;
+    }
+
+    protected function checkRequestForFiles(Request $request)
+    {
+        $data = $request->only($this->columns);
+
+        if ($request->hasFile($this->fileName)) {
+            $fileName = $this->upload_file($request[$this->fileName], $this->filesPath);
+            $data[$this->fileName] = $fileName;
+        }
+       
+        return $data;
     }
 
 }
