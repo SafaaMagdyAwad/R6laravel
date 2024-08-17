@@ -38,7 +38,7 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($cars as $car)
+            @foreach ($data as $car)
             <tr>
               <td scope="row">{{$car['carTitle']}}</td>
               <td>{{$car['price']}}</td>

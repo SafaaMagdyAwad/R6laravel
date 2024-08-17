@@ -6,84 +6,57 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class CarController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
-   
-    
-    public function index()
+  protected string $filesPath = "assets/images/car";
+    protected string $model = Car::class;
+    protected string $relationModel = Category::class;
+    protected string $relations = 'category';
+
+    public function __construct() {
+        $this->columns = (new Car())->getFillable();
+    }  
+    // all views must be in car/
+    // index    --> car/index
+    // create   --> car/create
+    // show     --> car/show
+    // edit     --> car/edit
+
+    public function store(Request $request): RedirectResponse
     {
-        $cars=Car::with('category')->get();
-        return view('cars',compact('cars'));
+        $request->validate([
+            'carTitle' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'discription' => 'required|string',
+            'price' => 'required|decimal:0,2',
+        ]);
+        $request['published'] = $request->has('published');
+        return parent::store($request);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {        
-        $categories=$this->getAll(Category::class);
-
-        return view('add_car',compact('categories'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request, String $id): RedirectResponse
     {
-        $this->baseStore($request,Car::class,"car");
-        //return
-        return redirect()->route('car.index');
+        $request->validate([
+            'carTitle' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'discription' => 'required|string',
+            'price' => 'required|decimal:0,2',
+        ]);
 
+        $request['published'] = $request->has('published');
+
+        return parent::update($request, $id);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(String $id)
-    {
-        $car=Car::with('category')->findOrFail($id);
-        // dd($car);//
-        return view('car',compact('car'));
-    }
-    
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Car $car)
-    {
-        $categories=$this->getAll(Category::class);
-        return view('edit_car',compact('car','categories'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request,Car $car)
-    { 
-        $this->baseUpdate($request,$car,"car");
-        return redirect()->route('car.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Car $car)
-    {
-        //
-        $this->baseDelete($car);
-        return redirect()->route('car.index');
-
-    }
-
-
     public function showDeleted(){
-        $cars=$this->baseDeleted(Car::class);
+        $cars=Car::onlyTrashed()->get();
         return view('trashedCars',compact('cars'));
     }
     public function perminantDelete(Car $car){

@@ -28,10 +28,10 @@
 
 
 
-            @if ($class->image !="null")
+            @if ($data->image !="null")
                   
             <div class="col-lg-4 col-md-6 col-10 position-relative overflow-hidden">
-              <img src="{{ asset('assets/images/class/' . $class->image) }}" 
+              <img src="{{ asset('assets/images/class/' . $data->image) }}" 
               alt="" class="card-img"
                 style="position: absolute; margin: auto; top: 50%; transform: translateY(-50%); width: 100%;height: 100%; object-fit: cover;" />
             </div>
@@ -41,26 +41,26 @@
 
             <div class="col-lg-8 col-md-6 col-12 card-body">
               <div class="mb-4 text-center py-2">
-                <h2 class="fw-bold bg-light card-header">{{$class->className}}</h2>
+                <h2 class="fw-bold bg-light card-header">{{$data->className}}</h2>
               </div>
               <div class="mb-4">
                 <p class="card-text">
-                  <span class="fw-bold">Price:</span> {{$class->price}}$
+                  <span class="fw-bold">Price:</span> {{$data->price}}$
                 </p>
               </div>
               <div class="mb-4">
                 <p class="card-text">
-                  <span class="fw-bold">Capacity:</span> {{$class->capacity}}
+                  <span class="fw-bold">Capacity:</span> {{$data->capacity}}
                 </p>
               </div>
               <div class="mb-4">
                 <p class="card-text">
-                  <span class="fw-bold">Is Full:</span><br>{{$class->isFull? "full":"not full"}}
+                  <span class="fw-bold">Is Full:</span><br>{{$data->isFull? "full":"not full"}}
                 </p>
               </div>
               <div class="mb-4">
                 <p class="card-text">
-                  <span class="fw-bold">Time:</span><br>From : {{$class->timeFrom}} To: {{$class->timeTo}}
+                  <span class="fw-bold">Time:</span><br>From : {{$data->timeFrom}} To: {{$data->timeTo}}
                 </p>
               </div>
               <div class="text-md-end">
@@ -80,41 +80,4 @@
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

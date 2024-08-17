@@ -24,17 +24,17 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Update Class</h2>
-        <form action="{{route('class.update',$class)}}" method="post" class="px-md-5" enctype="multipart/form-data">
+        <form action="{{route('class.update',$data)}}" method="post" class="px-md-5" enctype="multipart/form-data">
           @csrf
           @method('put')
-          <input type="hidden" name="old_image" value="{{$class->image}}">
+          <input type="hidden" name="old_image" value="{{$data->image}}">
           @error('className')
           <div class="error">{{ $message }}</div>
       @enderror
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">class Name:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="className" name="className" class="form-control py-2" value="{{old('className',$class->className)}}"/>
+              <input type="text" placeholder="className" name="className" class="form-control py-2" value="{{old('className',$data->className)}}"/>
             </div>
           </div>
           <div class="form-group mb-3 row">
@@ -42,10 +42,10 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="row">
-              @if ($class->image != "null")
+              @if ($data->image != "null")
                   
               <div class="col-3">
-                <img src="{{ asset('assets/images/class/' . $class->image) }}" alt="{{$class->className}}"   width="60" height="100" /> 
+                <img src="{{ asset('assets/images/class/' . $data->image) }}" alt="{{$data->className}}"   width="60" height="100" /> 
               </div>
               @endif
            
@@ -64,7 +64,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">capacity:</label>
             <div class="col-md-10">
-              <input type="number" step="1" name="capacity" placeholder="Enter capacity" class="form-control py-2" value="{{old('capacity',$class->capacity)}}"/>
+              <input type="number" step="1" name="capacity" placeholder="Enter capacity" class="form-control py-2" value="{{old('capacity',$data->capacity)}}"/>
             </div>
           </div>
           @error('price')
@@ -73,7 +73,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" name="price" placeholder="Enter price" class="form-control py-2" value="{{old('price',$class->price)}}" />
+              <input type="number" step="0.1" name="price" placeholder="Enter price" class="form-control py-2" value="{{old('price',$data->price)}}" />
             </div>
           </div>
           
@@ -86,7 +86,7 @@
             <div class="col-md-10">
 
               <input type="hidden" name="isFulled" class="form-check-input" style="padding: 0.7rem;"  value="0"   />
-              <input type="checkbox" name="isFulled" class="form-check-input" style="padding: 0.7rem;"  value="1"  @checked(old('isFulled',$class->isFulled))  />
+              <input type="checkbox" name="isFulled" class="form-check-input" style="padding: 0.7rem;"  value="1"  @checked(old('isFulled',$data->isFulled))  />
             </div>
           </div>
           <hr>
@@ -96,7 +96,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time From:</label>
             <div class="col-md-10">
-              <input type="time" placeholder="timeFrom" name="timeFrom" class="form-control py-2" value="{{old('timeFrom',$class->timeFrom)}}" />
+              <input type="time" placeholder="timeFrom" name="timeFrom" class="form-control py-2" value="{{old('timeFrom',$data->timeFrom)}}" />
             </div>
           </div>
           <hr>
@@ -106,7 +106,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time To:</label>
             <div class="col-md-10">
-              <input type="time" placeholder="timeTo" name="timeTo" class="form-control py-2" value="{{old('timeTo',$class->timeTo)}}" />
+              <input type="time" placeholder="timeTo" name="timeTo" class="form-control py-2" value="{{old('timeTo',$data->timeTo)}}" />
             </div>
           </div>
           <div class="text-md-end">

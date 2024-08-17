@@ -41,7 +41,7 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($classes as $class)
+            @foreach ($data as $class)
             <tr>
               <td scope="row">{{$class['className']}}</td>
               <td>{{$class['price']}}</td>

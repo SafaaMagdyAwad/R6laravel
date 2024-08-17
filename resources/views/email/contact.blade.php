@@ -4,7 +4,7 @@
     <title>Contact</title>
 </head>
 <body>
-    {{-- {{$title}} --}}
+    {{-- {{$title}}htmlspecialchars()  لا يمكن طباعه متغيرات يأسماء message , subject  --}}
     <h1>Message was sent</h1>
     <p>title: {{ $title }}</p>
     <p>Message: {{ $contactMessage }}</p>
