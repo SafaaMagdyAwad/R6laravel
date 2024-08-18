@@ -62,8 +62,8 @@ Route::get('/', function () {
 // );
 
 
-Route::get('login',[ExambleController::class,'login'])->name('login');
-Route::post('loginPost',[ExambleController::class,'loginPost'])->name('loginPost');
+// Route::get('login',[ExambleController::class,'login'])->name('login');
+// Route::post('loginPost',[ExambleController::class,'loginPost'])->name('loginPost');
 Route::get('image',[ExambleController::class,'imageForm'])->name('imageForm');
 Route::post('image',[ExambleController::class,'image'])->name('image');
 

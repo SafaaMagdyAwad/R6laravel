@@ -55,19 +55,19 @@ class BaseController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // check if request is coming with file
-        $data = $this->checkRequestForFiles($request);
-
-        $this->model::create($data);
-        return redirect()->route($this->getViewName('index'));
+        $data = $this->checkRequestForFiles($request); // if there was an image has to chick
+        //no need for relation data
+        $this->model::create($data); //Car::create()
+        return redirect()->route($this->getViewName('index'));///lowerCase modelName.index   ex car.index
     }
     public function show(String $id): View
     {
-        $model = new $this->model;
+        $model = new $this->model; 
 
         if($this->relations !== '') {
-            $model = $model::with($this->relations);
+            $model = $model::with($this->relations);  //Car::with('category')
         }
-        $data = $model->findOrFail($id);
+        $data = $model->findOrFail($id);  //
         return view($this->getViewName('show'), compact('data'));
     }
     public function edit(String $id): View
