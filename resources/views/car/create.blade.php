@@ -22,6 +22,8 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
+        <a href="{{ LaravelLocalization::getLocalizedURL('en') }}" class="btn btn_light">{{__('addCar.english')}}</a>
+        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}" class="btn btn_light">{{__('addCar.arabic')}}</a>
         <h2 class="fw-bold fs-2 mb-5 pb-2">{{__('addCar.addheading')}}</h2>
         <form action="{{route('car.store')}}" method="post" class="px-md-5" enctype="multipart/form-data">
           @csrf

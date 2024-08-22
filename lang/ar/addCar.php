@@ -10,6 +10,8 @@ return [
     'adddescription' => ' وصف:',
     'addpublished' => ' منشوره ؟:',
     'addbutton' => ' اضف سياره',
+    'arabic' => ' العربيه',
+    'english' => ' الانجليزيه',
 ]
 
 

@@ -10,6 +10,8 @@ return [
     'adddescription' => ' Discription:',
     'addpublished' => ' Published:',
     'addbutton' => ' AddCar',
+    'arabic' => ' Arabic',
+    'english' => ' English',
 ]
 
 
