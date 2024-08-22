@@ -1,9 +1,11 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 
 
-Route::prefix('car')->group(
+  
+Route::prefix('car')->middleware('verified')->group(
     function(){
         Route::get('',[CarController::class,'index'])->name('car.index');
         Route::post('',[CarController::class,'store'])->name('car.store');
@@ -17,4 +19,4 @@ Route::prefix('car')->group(
         Route::delete('{car}/perminant',[CarController::class,'perminantDelete'])->withTrashed()->name('car.perminantDelete');
         Route::patch('{car}/restore',[CarController::class,'restore'])->withTrashed()->name('car.restore');
     }    
-);  
+);
