@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ExambleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\SocialController;
 use App\Http\Middleware\Owner;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Illuminate\Support\Facades\Route;
@@ -98,10 +99,16 @@ Route::group(
                 Route::get('{car}/edit',[CarController::class,'edit'])->name('car.edit');
                 Route::delete('{car}/perminant',[CarController::class,'perminantDelete'])->withTrashed()->name('car.perminantDelete');
                 Route::patch('{car}/restore',[CarController::class,'restore'])->withTrashed()->name('car.restore');
-            }    
+            }
         );
     });
-  
+
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+Route::get('/auth/github/redirect',[SocialController::class,'redirect'])->name('socialLink');
+
+Route::get('/auth/github/callback',[SocialController::class,'callback']);
