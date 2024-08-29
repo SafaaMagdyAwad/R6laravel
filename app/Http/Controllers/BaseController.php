@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Common;
+use App\Jobs\WelcomeEmailJob;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BaseController extends Controller
 {
@@ -30,8 +32,9 @@ class BaseController extends Controller
 
     public function index(): View
     {
+        $user=Auth::user();
         $model = new $this->model;
-
+        WelcomeEmailJob::dispatch($user);
         if($this->relations !== '') {
             $model = $model::with($this->relations);
         }
@@ -62,7 +65,7 @@ class BaseController extends Controller
     }
     public function show(String $id): View
     {
-        $model = new $this->model; 
+        $model = new $this->model;
 
         if($this->relations !== '') {
             $model = $model::with($this->relations);  //Car::with('category')

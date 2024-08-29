@@ -109,6 +109,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-Route::get('/auth/github/redirect',[SocialController::class,'redirect'])->name('socialLink');
+Route::get('auth/{driver}/redirect',[SocialController::class,'redirect'])->name('socialLink');
 
-Route::get('/auth/github/callback',[SocialController::class,'callback']);
+Route::get('auth/{driver}/callback',[SocialController::class,'callback']);

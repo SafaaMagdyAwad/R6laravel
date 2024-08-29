@@ -1,36 +1,40 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
-use Illuminate\Http\Request;
+
 
 class SocialController extends Controller
 {
-    public function redirect(){
-        return Socialite::driver('github')->redirect();
+    public function redirect($driver){
+        return Socialite::driver($driver)->redirect();
     }
 
 
-    public function callback(){
-        
+    public function callback($driver){
 
-            $githubUser = Socialite::driver('github')->user();
+        $socialUser = Socialite::driver($driver)->stateless()->user();
+        // dd($githubUser);
+        $user = User::updateOrCreate([
+            'github_id' => $socialUser->id,
+        ], [
+            'name' => $socialUser->name ?? $socialUser->nickname,
+            'email' => $socialUser->email,
+            'github_token' => $socialUser->token,
+            'github_refresh_token' => $socialUser->refreshToken,
+            'password' =>Hash::make(Str::password(30)),
+            'active' =>1,
+        ]);
 
-            $user = User::updateOrCreate([
-                'github_id' => $githubUser->id,
-            ], [
-                'name' => $githubUser->name,
-                'email' => $githubUser->email,
-                'github_token' => $githubUser->token,
-                'github_refresh_token' => $githubUser->refreshToken,
-            ]);
+        Auth::login($user);
 
-            Auth::login($user);
+        return redirect()->route('home');
+    }
 
-            return redirect('/dashboard');
-        }
 }
