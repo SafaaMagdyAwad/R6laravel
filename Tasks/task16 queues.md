@@ -22,6 +22,3 @@ WelcomeEmailJob::dispatch($user);
 php artisan queue:work
 
 
-
-## run the queue
-php artisan queue:work
